@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.yemmyatthu.mememaker.MemeViewActivity" >
+    <item
+        android:id="@+id/settings_menu"
+        android:title="@string/settings_menu"
+        android:showAsAction="never"
+        />
+    
+    <item
+        android:id="@+id/about_menu"
+        android:title="@string/about_menu"
+        android:showAsAction="never"/>
+    
+    <item 
+        android:id="@+id/open_image"
+        android:title="@string/open_gallery"
+        android:icon="@drawable/ic_menu_add"
+        android:showAsAction="ifRoom"/>
+
+  </menu>

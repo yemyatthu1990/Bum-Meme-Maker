@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="meme_view">Main View for Meme</string>
+    <string name="app_name">BUMMemeMaker</string>
+    <string name="save_confirm">Do you want to save this meme?</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="save_title">SAVE</string>
+    <string name="save_button">Save</string>
+    <string name="hint_top_text">Insert top text here.....</string>
+    <string name="hint_bottom_text">Insert bottom text here.....</string>
+    <string name="name_exist">A file with same name exists. Do you want to overwrite it?</string>
+    <string name="plus_sign">+</string>
+    <string name="minus_sign">-</string>
+    <string name="settings_menu">Settings</string>
+    <string name="about_menu">About Developer</string>
+    <string name="about_developer">Ye Myat Thu @ thu.yemyat@gmail.com</string>
+    <string name="help_meme">Explanation</string>
+    <string name="meme_list_title">Popular Memes</string>
+    <string name="name">Name</string>
+    <string name="example_meme_button">Example</string>
+    <string name="help_meme_button">Help</string>
+    <string name="open_gallery">Add From Gallery</string>
+    <string name="image_picker_title">Select Picture</string>
+    <string name="help_custom_image">You know more than me about your image!</string>
+    <string name="top_custom_example">No example for custom image!</string>
+    <string name="save_custom_meme">YourMeme</string>
+    <string name="favorite_meme_title">Favorite Memes</string>
+    <string name="favorite_button">Favorite</string>
+
+</resources>

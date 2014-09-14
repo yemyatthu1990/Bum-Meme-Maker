@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ListPreference
+        android:key="fontColor"
+        android:title="Font color"
+        android:summary="Select the color for font."
+    	android:defaultValue="1"
+    	android:entries="@array/colorListArray"
+    	android:entryValues="@array/colorListValue"/>
+    <ListPreference 
+        android:key="borderColor"
+        android:title="Border color"
+        android:summary="Select the color for the border around the image."
+        android:defaultValue="1"
+        android:entries="@array/colorListArray"
+        android:entryValues="@array/colorListValue"/>
+    <ListPreference 
+        android:key="shadowColor"
+        android:title="Text shadow color"
+        android:summary="Select the color for the shadow around the text."
+        android:defaultValue="2"
+        android:entries="@array/colorListArray"
+        android:entryValues="@array/colorListValue"/>
+    <CheckBoxPreference
+        android:key="capCheckBox"
+        android:title="Force caps"
+        android:summaryOn="Disable force caps"
+        android:summaryOff="Enable force caps"
+        android:defaultValue="true">
+        
+    </CheckBoxPreference>
+    
+
+</PreferenceScreen>
