@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
@@ -90,13 +92,13 @@
 
 	<ImageView
 	    android:id="@+id/meme_view"
-	    android:layout_margin="6dp"
+	
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:contentDescription="@string/meme_view"
 	    android:layout_centerInParent="true"
-	    android:scaleType="center" />
-    
+	    android:adjustViewBounds="true"
+	    android:scaleType="fitXY"/>    
 	<TextView
 	    android:id="@+id/top_text"
 	    android:layout_width="wrap_content"
@@ -104,16 +106,16 @@
 	    android:layout_alignLeft="@id/meme_view"
 	    android:layout_alignRight="@id/meme_view"
 	    android:layout_alignTop="@id/meme_view"
-	    android:freezesText="true"
+	
 	    android:maxLines="3"
-	    android:padding = "10sp"
+	    android:padding = "6sp"
 	    android:textStyle="bold"
 	    android:textAllCaps="true"
 	    android:gravity="center_horizontal"
 	    android:shadowColor="#000000"
-	    android:shadowDx="2"
-	    android:shadowDy="2"
-	    android:shadowRadius="0.01"
+	    android:shadowDx="5"
+	    android:shadowDy="5"
+	    android:shadowRadius="0.02"
 	    android:layout_centerHorizontal="true"
 	    android:textColor="#FFFFFF" />
 
@@ -121,19 +123,19 @@
 	    android:id="@+id/bottom_text"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignBottom="@id/meme_view"
 	    android:layout_alignLeft="@id/meme_view"
-		android:layout_alignRight="@id/meme_view"
-	    android:freezesText="true"
+	    android:layout_alignRight="@id/meme_view"
+	    android:layout_alignBottom="@id/meme_view"
+	    
 	    android:maxLines="3"
-	    android:padding="10sp"
+	    android:padding="6sp"
 	    android:textAllCaps="true"
 	    android:textStyle="bold"	    
 	    android:gravity="center_horizontal"
 	    android:shadowColor="#000000"
-	    android:shadowDx="2"
-	    android:shadowDy="2"
-	    android:shadowRadius="0.01"
+	    android:shadowDx="5"
+	    android:shadowDy="5"
+	    android:shadowRadius="0.02"
 	    android:layout_centerHorizontal="true"
 	    android:textColor="#FFFFFF"/>
 	</RelativeLayout>
@@ -150,34 +152,14 @@
 		android:gravity = "center"
 		android:layout_alignParentBottom="true">
 			
-	   	    <Button
-	   	        android:id="@+id/example_meme"
-	   	        style="?android:attr/buttonBarButtonStyle"
-	   	        android:layout_width="wrap_content"
-	   	        android:layout_height="40dp"
-	   	        android:layout_margin="2dp"
-	   	        android:fadingEdge="horizontal|vertical"
-	   	        android:padding="2dp"
-	   	        android:text="@string/example_meme_button"
-	   	        android:textAlignment="center" />
-			
-			<Button
-			    android:id="@+id/help_meme"
-			    style="?android:attr/buttonBarButtonStyle"
-			    android:layout_width="wrap_content"
-			    android:layout_height="40dp"
-			    android:layout_margin="2dp"
-			    android:fadingEdge="horizontal|vertical"
-			    android:padding="2dp"
-			    android:text="@string/help_meme_button"
-			    android:textAlignment="center" />
-
+	   	 
 			<Button
 			    android:id="@+id/make_meme"
-			    style="?android:attr/buttonBarButtonStyle"
+			    style="?android:attr/buttonStyle"
 			    android:layout_width="wrap_content"
-			    android:layout_height="40dp"
-			    android:layout_margin="2dp"
+			    android:layout_height="wrap_content"
+			    
+			    android:layout_marginEnd="10dp"
 			    android:fadingEdge="horizontal|vertical"
 			    android:padding="2dp"
 			    android:text="@string/save_button"
@@ -187,6 +169,7 @@
 			    android:id="@+id/favorite_checkBox"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
+			    android:layout_marginStart="10dp"
 			    android:text="@string/favorite_button" 
 			    android:fadingEdge="horizontal|vertical"
 			    android:textAlignment="center" />

@@ -48,7 +48,9 @@ public class MemeListPagerActivity extends FragmentActivity {
 		};
 		
 		actionBar.addTab(actionBar.newTab().setText(R.string.meme_list_title).setTabListener(tabListener));
+		actionBar.addTab(actionBar.newTab().setText(R.string.myanmar_meme_title).setTabListener(tabListener));
 		actionBar.addTab(actionBar.newTab().setText(R.string.favorite_meme_title).setTabListener(tabListener));
+		
 		
 		FragmentManager fm = getSupportFragmentManager();
 		mViewPager.setAdapter(new FragmentPagerAdapter(fm){
@@ -64,7 +66,7 @@ public class MemeListPagerActivity extends FragmentActivity {
 			@Override
 			public int getCount() {
 				// TODO Auto-generated method stub
-				return 2;
+				return 3;
 			}
 			
 			

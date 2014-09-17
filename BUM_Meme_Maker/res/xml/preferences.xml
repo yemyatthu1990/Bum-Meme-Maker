@@ -9,11 +9,19 @@
     	android:entryValues="@array/colorListValue"/>
     <ListPreference 
         android:key="borderColor"
-        android:title="Border color"
-        android:summary="Select the color for the border around the image."
+        android:title="Border Bar color"
+        android:summary="Select the color for the border bar."
         android:defaultValue="1"
         android:entries="@array/colorListArray"
         android:entryValues="@array/colorListValue"/>
+    
+    <ListPreference 
+        android:key = "borderSize"
+        android:title="Border Bar size"
+        android:summary="Select the size for the border bar."
+        android:defaultValue="60"
+        android:entries="@array/sizeListArray"
+        android:entryValues="@array/sizeListValue"/>
     <ListPreference 
         android:key="shadowColor"
         android:title="Text shadow color"
@@ -21,6 +29,7 @@
         android:defaultValue="2"
         android:entries="@array/colorListArray"
         android:entryValues="@array/colorListValue"/>
+    
     <CheckBoxPreference
         android:key="capCheckBox"
         android:title="Force caps"
@@ -29,6 +38,13 @@
         android:defaultValue="true">
         
     </CheckBoxPreference>
+    
+    <CheckBoxPreference 
+        android:key = "borderBarCheckBox"
+        android:title = "Border Bar"
+        android:summaryOn="Disable border bar"
+        android:summaryOff ="Enable border bar"
+        android:defaultValue="false"/>
     
 
 </PreferenceScreen>

@@ -19,4 +19,16 @@
         <item>6</item>
         <item>7</item>
     </string-array>
+    
+    <string-array name="sizeListArray">
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
+    </string-array>
+    
+    <string-array name="sizeListValue">
+        <item>60</item>
+        <item>80</item>
+        <item>100</item>
+    </string-array>
 </resources>

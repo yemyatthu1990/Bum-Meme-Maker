@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-           	android:name="com.yemyatthu.bummememaker.SplashScreenActivity"
+           	android:name="com.yemyatthu.bummememaker.MemeListPagerActivity"
            	android:label="@string/app_name"
             android:screenOrientation="sensorPortrait">
             
@@ -31,13 +31,7 @@
             android:name="com.yemyatthu.bummememaker.SettingsActivity"
             android:label="@string/settings_menu"
             android:screenOrientation="sensorPortrait">
-        </activity>
-        <activity
-            
-         android:name="com.yemyatthu.bummememaker.MemeListPagerActivity"
-         android:label="@string/app_name"
-         android:screenOrientation="sensorPortrait">
-         </activity>   
+        </activity>  
         <activity
             android:name="com.yemyatthu.bummememaker.AboutViewActivity"
             android:label="@string/about_menu"

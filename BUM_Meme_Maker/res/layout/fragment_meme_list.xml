@@ -20,9 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/thumbnail_view"
-        android:textColor="@android:color/secondary_text_dark"
+        style ="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Subtitle"
         android:layout_centerVertical="true"
-        android:layout_margin = "4dp"
-        android:textSize="18sp"/>
+        android:layout_margin = "4dp"/>
 
 </RelativeLayout>

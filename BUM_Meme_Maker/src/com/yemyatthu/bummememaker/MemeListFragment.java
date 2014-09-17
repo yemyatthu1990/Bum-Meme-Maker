@@ -4,10 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.json.JSONException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,6 +17,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +35,7 @@ import android.widget.Toast;
 	private ImageView mMemeThumbnail;
 	private ArrayList<Meme> mMemes;
 	private ArrayList<Meme> mFavoriteMemes;
+	private ArrayList<Meme> mMyanmarMemes;
 	private static final int SELECT_PICTURE = 5;
 	private String selectedImagePath;
 	public static final String IMAGE_PATH = "com.yemyatthu.mememaker.IMAGE";
@@ -53,13 +57,19 @@ import android.widget.Toast;
 		setHasOptionsMenu(true);
 		mMemes = MemeLab.get(getActivity()).getMemes();
 		mFavoriteMemes = MemeLab.get(getActivity()).getFavoriteMemes();
+		mMyanmarMemes = MemeLab.get(getActivity()).getMyanmarMemes();
 		if(getArguments().getInt(TAB_ID)==0){
 			ArrayAdapter<Meme> adapter = new MemeAdapter(mMemes);
 		setListAdapter(adapter);}
-		if(getArguments().getInt(TAB_ID)==1){
+		if(getArguments().getInt(TAB_ID)==2){
 			ArrayAdapter<Meme> adapter1 = new MemeAdapter(mFavoriteMemes);
 			setListAdapter(adapter1);
 		}
+		if(getArguments().getInt(TAB_ID)==1){
+			ArrayAdapter<Meme> adapter1 = new MemeAdapter(mMyanmarMemes);
+			setListAdapter(adapter1);
+		}
+	
 	
 	}
 	
@@ -103,11 +113,13 @@ import android.widget.Toast;
 		@Override
 		public View getView(int position,View convertView,ViewGroup container){
 			if (convertView == null){
+				
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_meme_list, null);
 			}
 			Meme meme = getItem(position);
 			mMemeNameView = (TextView)convertView.findViewById(R.id.meme_name_view);
-			mMemeNameView.setText((meme.getName()).replace("_", " "));
+			mMemeNameView.setText((meme.getName()).replace("_", " ").toUpperCase(Locale.ENGLISH));
+
 			mMemeThumbnail = (ImageView)convertView.findViewById(R.id.thumbnail_view);
 		
 			makeThumbnail(mMemeThumbnail,meme.getName());
@@ -121,7 +133,7 @@ import android.widget.Toast;
 
 			    try 
 			    {
-			    InputStream is = getResources().openRawResource(getResources().getIdentifier(name , "drawable", getActivity().getPackageName()));
+			    InputStream is = getResources().openRawResource(getResources().getIdentifier(name , "drawable",getActivity().getPackageName()));
 			    Bitmap imageBitmap = BitmapFactory.decodeStream(is);
 
 			   

@@ -20,6 +20,7 @@ import android.content.Context;
 
 public class MemeLab {
 	private ArrayList<Meme> mMemes;
+	private ArrayList<Meme> mMyanmarMemes;
 	private Meme mMeme;
 	private static MemeLab sMemeLab;
 	private Context mAppContext;
@@ -34,38 +35,27 @@ public class MemeLab {
 		mMemes = new ArrayList<Meme>();
 	
 		String[] memeNameList = c.getResources().getStringArray(R.array.meme_list);
-		Field[] fLst = R.string.class.getFields();
-		int i=0;
-		memeHelpList = new String[fLst.length];
-		for(Field f: fLst){
-			memeHelpList[i]=f.getName();
-			i++;
-		}
+		String[] myanmarMeme = c.getResources().getStringArray(R.array.myanmar_meme_list);
 		for(String name: memeNameList){
 			
 			mMeme = new Meme();
 			mMeme.setName(name);
-			
-			
-			if(Arrays.asList(memeHelpList).contains(name)){
-				
-				mMeme.setHelp(c.getResources().getString(c.getResources()
-					.getIdentifier(name, "string", c.getPackageName())));}
-				
-				if(Arrays.asList(memeHelpList).contains(name+"_top_text")){
-				
-					topExample = c.getResources().getString(c.getResources()
-							.getIdentifier(name +"_top_text", "string", c.getPackageName()));
-					mMeme.setTopExample(topExample);}
-				if(Arrays.asList(memeHelpList).contains(name+"_bottom_text")){
-					bottomExample =c.getResources().getString(c.getResources()
-							.getIdentifier(name+"_bottom_text", "string", c.getPackageName()));
-					mMeme.setBottomExample(bottomExample);}
 				
 	
 			
 				
 			mMemes.add(mMeme);}
+		
+		mMyanmarMemes = new ArrayList<Meme>();
+		for(String name: myanmarMeme){
+			
+			mMeme = new Meme();
+			mMeme.setName(name);
+				
+	
+			
+				
+			mMyanmarMemes.add(mMeme);}
 		mFavoriteMemes = new ArrayList<Meme>();
 		try{
 			for (String name: loadFavoriteMemes()){
@@ -111,11 +101,18 @@ public class MemeLab {
 		return mMemes;
 	}
 	
+	public ArrayList<Meme> getMyanmarMemes(){
+		return mMyanmarMemes;
+	}
+	
 	public Meme getMeme(String name){
 		for(Meme meme: mMemes){
 			if(meme.getName().equals(name))
-				return meme;
-		}
+				return meme;}
+		
+		for(Meme myanmar: mMyanmarMemes){
+			if(myanmar.getName().equals(name))
+				return myanmar;}
 		return null;
 	}
 	

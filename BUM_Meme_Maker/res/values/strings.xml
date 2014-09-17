@@ -19,8 +19,6 @@
     <string name="help_meme">Explanation</string>
     <string name="meme_list_title">Popular Memes</string>
     <string name="name">Name</string>
-    <string name="example_meme_button">Example</string>
-    <string name="help_meme_button">Help</string>
     <string name="open_gallery">Add From Gallery</string>
     <string name="image_picker_title">Select Picture</string>
     <string name="help_custom_image">You know more than me about your image!</string>
@@ -28,5 +26,6 @@
     <string name="save_custom_meme">YourMeme</string>
     <string name="favorite_meme_title">Favorite Memes</string>
     <string name="favorite_button">Favorite</string>
-
+    <string name="myanmar_meme_title">Myanmar Memes</string>
+    
 </resources>
