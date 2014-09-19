@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" >
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:persistentDrawingCache="scrolling"
+        android:smoothScrollbar="true" >
+
+    </ListView>
+    <TextView 
+        android:id="@android:id/empty"
+        android:layout_width = "wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="true"
+        style="@android:style/TextAppearance.DeviceDefault.Widget.DropDownHint"
+        android:text = "@string/empty_list"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

@@ -10,8 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop ="4dp"
-        android:layout_marginBottom ="4dp"
         android:layout_marginRight ="4dp"
         android:layout_marginLeft="10dp"/>
 
@@ -20,8 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/thumbnail_view"
-        style ="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Subtitle"
-        android:layout_centerVertical="true"
-        android:layout_margin = "4dp"/>
+        android:layout_centerInParent="true"
+        android:layout_marginLeft = "10dp"
+        android:textSize = "14sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"/>
 
 </RelativeLayout>

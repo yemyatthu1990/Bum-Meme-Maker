@@ -113,9 +113,9 @@
 	    android:textAllCaps="true"
 	    android:gravity="center_horizontal"
 	    android:shadowColor="#000000"
-	    android:shadowDx="5"
-	    android:shadowDy="5"
-	    android:shadowRadius="0.02"
+	    android:shadowDx="3"
+	    android:shadowDy="3"
+	    android:shadowRadius="5"
 	    android:layout_centerHorizontal="true"
 	    android:textColor="#FFFFFF" />
 
@@ -133,9 +133,9 @@
 	    android:textStyle="bold"	    
 	    android:gravity="center_horizontal"
 	    android:shadowColor="#000000"
-	    android:shadowDx="5"
-	    android:shadowDy="5"
-	    android:shadowRadius="0.02"
+	    android:shadowDx="3"
+	    android:shadowDy="3"
+	    android:shadowRadius="5"
 	    android:layout_centerHorizontal="true"
 	    android:textColor="#FFFFFF"/>
 	</RelativeLayout>
@@ -144,37 +144,44 @@
 
 	
 	
-	<LinearLayout
+	<RelativeLayout
 		android:id="@+id/linear_field"
 		android:layout_height = "60sp"
 		android:layout_width = "match_parent"
-		android:orientation = "horizontal"
-		android:gravity = "center"
 		android:layout_alignParentBottom="true">
-			
-	   	 
-			<Button
-			    android:id="@+id/make_meme"
-			    style="?android:attr/buttonStyle"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    
-			    android:layout_marginEnd="10dp"
-			    android:fadingEdge="horizontal|vertical"
-			    android:padding="2dp"
-			    android:text="@string/save_button"
-			    android:textAlignment="center" />
 
-			<CheckBox
-			    android:id="@+id/favorite_checkBox"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_marginStart="10dp"
-			    android:text="@string/favorite_button" 
-			    android:fadingEdge="horizontal|vertical"
-			    android:textAlignment="center" />
+		<CheckBox
+		    android:id="@+id/favorite_checkBox"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		  	android:layout_centerInParent="true"
+		    android:fadingEdge="horizontal|vertical"
+		    android:text="@string/favorite_button"
+		    android:textAlignment="center" />
+
+		<Button
+		    android:id="@+id/make_meme"
+		    style="?android:attr/buttonStyle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentTop="true"
+		    android:layout_toLeftOf="@+id/favorite_checkBox"
+		    android:fadingEdge="horizontal|vertical"
+		    android:layout_marginEnd="10dp"
+		    android:padding="4dp"
+		    android:text="@string/save_button"
+		    android:textAlignment="inherit"/>
+		<Button
+		    android:id="@+id/add_template"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:layout_marginStart="10dp"
+			android:padding="4dp"
+		    android:layout_toRightOf="@+id/favorite_checkBox"
+		    android:text="@string/add_template"
+		    android:textAlignment="center" />
 			
-	</LinearLayout>
+	</RelativeLayout>
 	
 
 </RelativeLayout>

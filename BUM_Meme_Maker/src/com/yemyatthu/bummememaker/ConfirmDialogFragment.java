@@ -11,16 +11,18 @@ import android.os.Bundle;
 public class ConfirmDialogFragment extends DialogFragment{
 	public final String SEND_RESULT = "OK";
 	private int mMessage;
-	public ConfirmDialogFragment(int saveConfirm)
+	private int mTitle;
+	public ConfirmDialogFragment(int saveConfirm,int title)
 	{	
 	
 		mMessage = saveConfirm;
+		mTitle = title;
 	}
 	
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState){
-			return new AlertDialog.Builder(getActivity()).setMessage(mMessage).setTitle(R.string.save_title).setIcon(R.drawable.ic_dialog_alert_holo_light)
+			return new AlertDialog.Builder(getActivity()).setMessage(mMessage).setTitle(mTitle).setIcon(R.drawable.ic_dialog_alert_holo_light)
 					.setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener(){
 
 					@Override

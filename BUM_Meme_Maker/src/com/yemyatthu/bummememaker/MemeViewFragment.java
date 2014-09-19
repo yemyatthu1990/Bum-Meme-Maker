@@ -1,7 +1,10 @@
 package com.yemyatthu.bummememaker;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -19,6 +22,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -26,6 +30,7 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,12 +51,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 @SuppressLint("NewApi")
 public class MemeViewFragment extends Fragment{	
+	private String path;
+	private String addName;
 	private String saveName;
+	private String memeName;
 	private int fontColor;
 	private int borderColor;
 	private int shadowColor;
 	private View memeContainer;
 	private CheckBox favoriteCheckBox;
+	private Button addTemplate;
 	private Button makeMeme;
 	private Button fontPlus1;
 	private Button fontPlus2;
@@ -74,10 +83,17 @@ public class MemeViewFragment extends Fragment{
 	public static final int REQUEST_CODE1 = 1;
 	public static final int REQUEST_CODE2 = 2;
 	public static final int REQUEST_CODE3 = 3;
+	public static final int REQUEST_CODE4 = 4;
+	public static final int REQUEST_CODE5 = 5;
+	public static final int CUSTOM_ID = 10;
 	public static final String NAME_TAG = "com.yemyatthu.mememaker.NAME";
-	private static final int SELECT_PICTURE = 5;
+	private static final int SELECT_PICTURE = 6;
 	public static final String FAVORITE_RESULT = "com.yemyatthu.bummememaker.FAVORITE";
-	private static final Object selctedImagePath = null;
+	public static final String MEME_RESULT = "com.yemyatthu.bummememaker.MEME";
+	public static final String MEME_NAME = "com.yemyatthu.bummememaker.MEMENAME";
+	public static final String finishedMeme = "/memesimages/";
+	public static final String templateMeme = "/memestemplates/";
+	private static final String selctedImagePath = null;
 	
 	
 	private SharedPreferences prefs;
@@ -191,7 +207,19 @@ public class MemeViewFragment extends Fragment{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		getActivity().setTitle(getArguments().getString(NAME_TAG).replace("_", " ").toUpperCase(Locale.ENGLISH));
+		selectedImagePath = getArguments().getString(NAME_TAG);
+		if(((MemeLab.get(getActivity())).getMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))||
+				((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))){
+			memeName = (getArguments().getString(NAME_TAG)).substring(0, 1).toUpperCase(Locale.ENGLISH);
+		memeName += (getArguments().getString(NAME_TAG)).substring(1).replace("_", " ").toLowerCase(Locale.ENGLISH);}
+		else{
+			File file = new File(selectedImagePath);
+			memeName = file.getName().substring(0,1).toUpperCase(Locale.ENGLISH);
+			memeName += file.getName().substring(1).toLowerCase(Locale.ENGLISH);
+			
+		}
+		
+		getActivity().setTitle(memeName);
 		
 		
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -210,18 +238,26 @@ public class MemeViewFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup root,Bundle savedInstanceState){
 		final View v = inflater.inflate(R.layout.fragment_meme_view,root,false);
-		selectedImagePath = getArguments().getString(NAME_TAG);
 		memeView = (ImageView)v.findViewById(R.id.meme_view);
+	
 		if(((MemeLab.get(getActivity())).getMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))||
 				((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))){
 			Bitmap bitmapImage= BitmapFactory.decodeResource(getActivity().getResources(), getActivity().getResources().getIdentifier(selectedImagePath, "drawable", getActivity().getPackageName()));
 			memeView.setImageBitmap(bitmapImage);
 		}
+
 		else{
-			Bitmap bitmapImage = BitmapFactory.decodeFile(selectedImagePath);
-			memeView.setImageBitmap(bitmapImage);
+				if(MemeLab.get(getActivity()).getCustomMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))){
+				Bitmap bitmapImage =  BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().toString()+MemeViewFragment.templateMeme+
+					selectedImagePath+".jpg");
+				memeView.setImageBitmap(bitmapImage);}
+				else{
+					Bitmap bitmapImage = BitmapFactory.decodeFile(selectedImagePath);
+					memeView.setImageBitmap(bitmapImage);}
+				
 			
 		}
+		
 		
 		
 		topView = (TextView)v.findViewById(R.id.top_text);
@@ -284,6 +320,12 @@ public class MemeViewFragment extends Fragment{
 			});
 		
 		favoriteCheckBox = (CheckBox)v.findViewById(R.id.favorite_checkBox);
+		if(!(((MemeLab.get(getActivity())).getMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))||
+		((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))||
+		(MemeLab.get(getActivity()).getCustomMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))))){
+			favoriteCheckBox.setEnabled(false);
+		}
+		
 		favoriteCheckBox.setChecked(MemeLab.get(getActivity()).getFavoriteMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)));;
 		favoriteCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -292,14 +334,15 @@ public class MemeViewFragment extends Fragment{
 				
 				// TODO Auto-generated method stub
 				if(((MemeLab.get(getActivity())).getMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))||
-						((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))){
+						((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))||
+						(MemeLab.get(getActivity()).getCustomMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)))){
 					if(isChecked){
 						Toast.makeText(getActivity(), "added to Favorites", Toast.LENGTH_SHORT).show();
-						sendResult(true);
+						sendResult(FAVORITE_RESULT,true);
 					}
 					if(!isChecked){
 						Toast.makeText(getActivity(), "removed from Favorites", Toast.LENGTH_SHORT).show();
-						sendResult(false);
+						sendResult(FAVORITE_RESULT,false);
 					}
 				}
 				else{
@@ -307,6 +350,25 @@ public class MemeViewFragment extends Fragment{
 				}
 				
 			}
+		});
+	
+		addTemplate = (Button)v.findViewById(R.id.add_template);
+		if(((MemeLab.get(getActivity())).getMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))||
+						((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))||
+						(MemeLab.get(getActivity()).getCustomMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)))){
+		addTemplate.setEnabled(false);}
+		addTemplate.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				FragmentManager fm = getFragmentManager();
+				ConfirmDialogFragment cfDialog = new ConfirmDialogFragment(R.string.add_confirm,R.string.save_title);
+				cfDialog.setTargetFragment(MemeViewFragment.this, REQUEST_CODE4);
+				cfDialog.show(fm, CONFIRM);
+				
+			}
+			
 		});
 		memeContainer=v.findViewById(R.id.memeView_container);
 		makeMeme = (Button)v.findViewById(R.id.make_meme);
@@ -316,7 +378,7 @@ public class MemeViewFragment extends Fragment{
 				public void onClick(View p1)
 				{
 					FragmentManager fm = getFragmentManager();
-					ConfirmDialogFragment cfDialog = new ConfirmDialogFragment(R.string.save_confirm);
+					ConfirmDialogFragment cfDialog = new ConfirmDialogFragment(R.string.save_confirm,R.id.save_name_edit);
 					cfDialog.setTargetFragment(MemeViewFragment.this, REQUEST_CODE1);
 					cfDialog.show(fm, CONFIRM);
 					
@@ -389,6 +451,41 @@ public class MemeViewFragment extends Fragment{
 		outState.putIntegerArrayList(ID_TAG,restoredSize);
 	}
 	
+	public void addName(){
+		FragmentManager fm = getFragmentManager();
+		View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_save_name, null);
+		EditText edText = (EditText)view.findViewById(R.id.save_name_edit);
+		edText.setText(R.string.save_custom_meme);
+		addName = getResources().getString(R.string.save_custom_meme);
+		SaveNameDialogFragment snDialog = new SaveNameDialogFragment(view);
+		snDialog.setTargetFragment(MemeViewFragment.this, REQUEST_CODE5);
+	
+		snDialog.show(fm,CONFIRM);
+		edText.addTextChangedListener(new TextWatcher(){
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				addName = s.toString();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+			}
+			
+		});
+		
+	}
+	
 	
 	public void getName(){
 		FragmentManager fm = getFragmentManager();
@@ -428,7 +525,9 @@ public class MemeViewFragment extends Fragment{
 			
 		});
 	}
-	public File getFile(View image){
+		
+	
+	public File getFile(View image,String dir, String name){
 		
 
 		bitmap = Bitmap.createBitmap(image.getWidth(),image.getHeight(),Bitmap.Config.ARGB_8888);
@@ -436,23 +535,36 @@ public class MemeViewFragment extends Fragment{
 		image.draw(c);
 		
 		String root = Environment.getExternalStorageDirectory().toString();
-		File newDir = new File(root + "/memesimages/");
+		File newDir = new File(root + dir);
 		newDir.mkdirs();
 
-		File file=new File(newDir,saveName+".jpg");
+		File file=new File(newDir,name+".jpg");
 		return file;
 	}
 	
 	public void checkName(File file){
 		if(file.exists()){
 			FragmentManager fm = getFragmentManager(); 
-			ConfirmDialogFragment cfDialog = new ConfirmDialogFragment(R.string.name_exist);
+			ConfirmDialogFragment cfDialog = new ConfirmDialogFragment(R.string.name_exist,R.string.save_title);
 			cfDialog.setTargetFragment(MemeViewFragment.this,REQUEST_CODE2 );
 			cfDialog.show(fm, CONFIRM);
 		}
 		else
 			saveFile(file);
 
+	}
+	
+	public void addFile(File file){
+		try{
+			FileOutputStream out = new FileOutputStream(file);
+			
+			bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
+			out.flush();
+			out.close();
+			Toast.makeText(getActivity(),"Added as " + file.getPath(),Toast.LENGTH_LONG).show();
+		}catch(Exception e){Toast.makeText(getActivity(),"Exception catch " + file.getPath(),Toast.LENGTH_LONG).show();
+			
+		}
 	}
 	public void saveFile(File file){
 			try{
@@ -466,7 +578,13 @@ public class MemeViewFragment extends Fragment{
 				i.setAction(Intent.ACTION_VIEW);
 				i.setDataAndType(uri,"image/*");
 				startActivity(i);
-				Toast.makeText(getActivity(),"Saved as " + file.getPath(),Toast.LENGTH_LONG).show();}
+				Toast.makeText(getActivity(),"Saved as " + file.getPath(),Toast.LENGTH_LONG).show();
+				MediaScannerConnection.scanFile(getActivity(),
+		                new String[] { file.toString() }, null,
+		                new MediaScannerConnection.OnScanCompletedListener() {
+		            public void onScanCompleted(String path, Uri uri) {}});
+		            }
+
 				catch(Exception e){
 					
 				}
@@ -478,21 +596,38 @@ public class MemeViewFragment extends Fragment{
 			getName();
 		}
 		if (requestCode == REQUEST_CODE3){
-			File file = getFile(memeContainer);
+			File file = getFile(memeContainer,finishedMeme,saveName);
 			checkName(file);
 		}
 		if (requestCode == REQUEST_CODE2){
-			File file= getFile(memeContainer);
+			File file= getFile(memeContainer,finishedMeme,saveName);
 			saveFile(file);
 		}
+		if (requestCode == REQUEST_CODE4){
+			addName();
+			
+		}
+		if (requestCode == REQUEST_CODE5){
+		
+			File file =  getFile(memeView,templateMeme,addName);
+			addFile(file);
+			sendResult(MEME_RESULT,true);
+			
+		}
 		if (requestCode == SELECT_PICTURE){
+			
 			Uri selectedImageUri = data.getData();
-			String path = getPath(selectedImageUri);
+			path = getPath(selectedImageUri);
 			Intent i = new Intent(getActivity(),MemeViewActivity.class);
 			i.putExtra(NAME_TAG, path);
-			startActivity(i);}
+			startActivityForResult(i,CUSTOM_ID);}
 		
-	}
+		if(requestCode == CUSTOM_ID){
+			sendResult(MEME_RESULT,true);
+			}
+		}
+		
+	
 		
 	
 	 @Override
@@ -537,10 +672,23 @@ public class MemeViewFragment extends Fragment{
 		} 
 
 	 
-	 public void sendResult(boolean result){
+	 public void sendResult(String tag,boolean result){
 		 Intent i = new Intent();
-		 i.putExtra(FAVORITE_RESULT, result);
+		 
+		 i.putExtra(tag,result);
+		 if(tag.equals(MEME_RESULT)){
+			 i.putExtra(MEME_NAME, addName);
+		 }
 		 getActivity().setResult(Activity.RESULT_OK, i);
+	 }
+	 
+	 public boolean tempChecker(String name){
+		 for(Meme meme:MemeLab.get(getActivity()).getCustomMemes()){
+			 if(meme.getName() == name){
+				 return true;}
+	 
+		 }
+		 return false;
 	 }
 	
 }

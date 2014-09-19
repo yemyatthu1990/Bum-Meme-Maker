@@ -101,7 +101,7 @@ public final class R {
         public static final int matrix_morpheus=0x7f020044;
         public static final int men_laughing=0x7f020045;
         public static final int misunderstood_wirathu=0x7f020046;
-        public static final int musically_oblivious_8th_grader=0x7f020047;
+        public static final int musically_oblivious_eight_grader=0x7f020047;
         public static final int myanmar_doctor_logic=0x7f020048;
         public static final int myanmar_movies_logic=0x7f020049;
         public static final int myanmar_nurse_logic=0x7f02004a;
@@ -165,13 +165,14 @@ public final class R {
     }
     public static final class id {
         public static final int about_container=0x7f070001;
-        public static final int about_menu=0x7f07001d;
+        public static final int about_menu=0x7f07001e;
         public static final int about_text_view=0x7f070007;
+        public static final int add_template=0x7f07001a;
         public static final int bottom_edit_text=0x7f07000f;
         public static final int bottom_text=0x7f070017;
         public static final int content_frame=0x7f070003;
         public static final int drawer_layout=0x7f070002;
-        public static final int favorite_checkBox=0x7f070019;
+        public static final int favorite_checkBox=0x7f070018;
         public static final int font_minus1=0x7f07000e;
         public static final int font_minus2=0x7f070011;
         public static final int font_plus1=0x7f07000d;
@@ -182,16 +183,16 @@ public final class R {
         public static final int left_drawer=0x7f070004;
         public static final int linear_field=0x7f070013;
         public static final int listPager=0x7f070000;
-        public static final int make_meme=0x7f070018;
+        public static final int make_meme=0x7f070019;
         public static final int memeView_container=0x7f070014;
         public static final int meme_Box=0x7f070012;
         public static final int meme_name_view=0x7f07000b;
         public static final int meme_view=0x7f070015;
-        public static final int open_image=0x7f07001e;
+        public static final int open_image=0x7f07001f;
         public static final int relatvie_layout_meme_list=0x7f070009;
-        public static final int save_name_edit=0x7f07001a;
-        public static final int settings_menu=0x7f07001c;
-        public static final int splash_screen=0x7f07001b;
+        public static final int save_name_edit=0x7f07001b;
+        public static final int settings_menu=0x7f07001d;
+        public static final int splash_screen=0x7f07001c;
         public static final int thumbnail_view=0x7f07000a;
         public static final int top_edit_text=0x7f07000c;
         public static final int top_text=0x7f070016;
@@ -208,15 +209,19 @@ public final class R {
         public static final int fragment_meme_view=0x7f030008;
         public static final int fragment_save_name=0x7f030009;
         public static final int fragment_splash_screen=0x7f03000a;
+        public static final int list_view=0x7f03000b;
     }
     public static final class menu {
         public static final int meme_view=0x7f0a0000;
     }
     public static final class string {
-        public static final int about_developer=0x7f08000e;
         public static final int about_menu=0x7f08000d;
+        public static final int add_confirm=0x7f08001b;
+        public static final int add_template=0x7f08001a;
         public static final int app_name=0x7f080001;
         public static final int cancel_button=0x7f080004;
+        public static final int custom_meme_title=0x7f08001c;
+        public static final int empty_list=0x7f08001d;
         public static final int favorite_button=0x7f080018;
         public static final int favorite_meme_title=0x7f080017;
         public static final int help_custom_image=0x7f080014;
@@ -224,6 +229,7 @@ public final class R {
         public static final int hint_bottom_text=0x7f080008;
         public static final int hint_top_text=0x7f080007;
         public static final int image_picker_title=0x7f080013;
+        public static final int license=0x7f08000e;
         public static final int meme_list_title=0x7f080010;
         public static final int meme_view=0x7f080000;
         public static final int minus_sign=0x7f08000b;

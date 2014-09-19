@@ -21,44 +21,48 @@ import android.content.Context;
 public class MemeLab {
 	private ArrayList<Meme> mMemes;
 	private ArrayList<Meme> mMyanmarMemes;
+	private ArrayList<Meme> mCustomMemes;
 	private Meme mMeme;
 	private static MemeLab sMemeLab;
 	private Context mAppContext;
-	private String[] memeHelpList;
-	private String topExample = null;
-	private String bottomExample = null;
 	private ArrayList<Meme> mFavoriteMemes;
-	private final String FILE_NAME="memes.jason";
+	public static final String FAVORITE_FILE_NAME="memes.jason";
+	public static final String CUSTOM_FILE_NAME = "custommemes.jason";
 	
 	private MemeLab(Context c){
+		String [] myanmarMemes = c.getResources().getStringArray(R.array.myanmar_meme_list);
+		 
 		mAppContext = c;
 		mMemes = new ArrayList<Meme>();
-	
-		String[] memeNameList = c.getResources().getStringArray(R.array.meme_list);
-		String[] myanmarMeme = c.getResources().getStringArray(R.array.myanmar_meme_list);
-		for(String name: memeNameList){
-			
-			mMeme = new Meme();
-			mMeme.setName(name);
-				
-	
-			
-				
-			mMemes.add(mMeme);}
-		
 		mMyanmarMemes = new ArrayList<Meme>();
-		for(String name: myanmarMeme){
+		String[] memeNameList = mAppContext.getResources().getStringArray(R.array.meme_list);
 			
-			mMeme = new Meme();
-			mMeme.setName(name);
+			for(String name: memeNameList){
 				
+				mMeme = new Meme();
+				mMeme.setName(name);
+				mMemes.add(mMeme);}
+		
 	
-			
+			for(String name: myanmarMemes){
+				
+				mMeme = new Meme();
+				mMeme.setName(name);
 				
 			mMyanmarMemes.add(mMeme);}
+		mCustomMemes = new ArrayList<Meme>();
+		try{
+			for (String name: loadFavoriteMemes(CUSTOM_FILE_NAME)){
+				Meme meme = new Meme();
+				meme.setName(name);
+				mCustomMemes.add(meme);
+			}
+		}catch(Exception e){
+			
+		}
 		mFavoriteMemes = new ArrayList<Meme>();
 		try{
-			for (String name: loadFavoriteMemes()){
+			for (String name: loadFavoriteMemes(FAVORITE_FILE_NAME)){
 				mFavoriteMemes.add(getMeme(name));}
 		}catch(Exception e){
 			
@@ -70,11 +74,27 @@ public class MemeLab {
 	
 
 	
-	public ArrayList<Meme> getFavoriteMemes() {
-		return mFavoriteMemes;
+	public ArrayList<Meme> getCustomMemes() {
+		return mCustomMemes;
 	}
 
 
+
+
+
+
+	public void setCustomMemes(ArrayList<Meme> customMemes) {
+		mCustomMemes = customMemes;
+	}
+
+
+
+
+
+
+	public ArrayList<Meme> getFavoriteMemes() {
+		return mFavoriteMemes;
+	}
 
 
 
@@ -88,9 +108,7 @@ public class MemeLab {
 
 
 
-	public String[] getMemeHelp(){
-		return memeHelpList;
-	}
+
 	public static MemeLab get(Context c){
 		if (sMemeLab==null){
 		sMemeLab = new MemeLab(c.getApplicationContext()) ;}
@@ -113,15 +131,19 @@ public class MemeLab {
 		for(Meme myanmar: mMyanmarMemes){
 			if(myanmar.getName().equals(name))
 				return myanmar;}
+		for(Meme custom: mCustomMemes){
+			if(custom.getName().equals(name))
+				return custom;}
+		
 		return null;
 	}
 	
 	
-	public ArrayList<String> loadFavoriteMemes() throws IOException,JSONException{
+	public ArrayList<String> loadFavoriteMemes(String fileName) throws IOException,JSONException{
 		ArrayList<String> favoriteMemes = new ArrayList<String>();
 		BufferedReader reader = null;
 		try{
-			InputStream in = mAppContext.openFileInput(FILE_NAME);
+			InputStream in = mAppContext.openFileInput(fileName);
 			reader = new BufferedReader(new InputStreamReader(in));
 			StringBuilder jsonString = new StringBuilder();
 			String line = null;
@@ -132,7 +154,7 @@ public class MemeLab {
 			 for(int i =0;i<array.length();i++){
 				 favoriteMemes.add(array.getString(i));}
 			 }catch(Exception e){
-			
+					
 		}finally{
 			if(reader != null){
 				reader.close();
@@ -142,14 +164,14 @@ public class MemeLab {
 	}
 	
 
-	public void saveFavoriteMemes(ArrayList<Meme> favoriteMemes) throws JSONException,IOException{
+	public void saveMemes(ArrayList<Meme> favoriteMemes,String fileName) throws JSONException,IOException{
 		JSONArray array = new JSONArray();
 		for(Meme meme: favoriteMemes){
 			array.put(meme.getName());
 		}
 		Writer writer = null;
 		try{
-			OutputStream out = mAppContext.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+			OutputStream out = mAppContext.openFileOutput(fileName, Context.MODE_PRIVATE);
 			writer = new OutputStreamWriter(out);
 			writer.write(array.toString());
 		}finally{

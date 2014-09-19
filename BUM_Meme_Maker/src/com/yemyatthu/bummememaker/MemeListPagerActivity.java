@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ public class MemeListPagerActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.listPager);
+		mViewPager.setOffscreenPageLimit(2);
 		setContentView(mViewPager);
 		
 		final ActionBar actionBar = getActionBar();
@@ -50,24 +52,24 @@ public class MemeListPagerActivity extends FragmentActivity {
 		actionBar.addTab(actionBar.newTab().setText(R.string.meme_list_title).setTabListener(tabListener));
 		actionBar.addTab(actionBar.newTab().setText(R.string.myanmar_meme_title).setTabListener(tabListener));
 		actionBar.addTab(actionBar.newTab().setText(R.string.favorite_meme_title).setTabListener(tabListener));
+		actionBar.addTab(actionBar.newTab().setText(R.string.custom_meme_title).setTabListener(tabListener));
 		
 		
 		FragmentManager fm = getSupportFragmentManager();
-		mViewPager.setAdapter(new FragmentPagerAdapter(fm){
-			
+		mViewPager.setAdapter(new FragmentStatePagerAdapter(fm){
+
 			@Override
 			public Fragment getItem(int position) {
 				// TODO Auto-generated method stub
-				
 				return MemeListFragment.getNewInstance(position);
-				
 			}
 
 			@Override
 			public int getCount() {
 				// TODO Auto-generated method stub
-				return 3;
+				return 4;
 			}
+			
 			
 			
 		});
