@@ -51,6 +51,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 @SuppressLint("NewApi")
 public class MemeViewFragment extends Fragment{	
+	private Typeface type;
 	private String path;
 	private String addName;
 	private String saveName;
@@ -70,6 +71,7 @@ public class MemeViewFragment extends Fragment{
 	private int topViewSize;
 	private int bottomViewSize;
 	private EditText bottomEdit;
+	private TextView waterMark;
 	private TextView topView;
 	private TextView bottomView;;
 	private ImageView memeView;
@@ -109,6 +111,7 @@ public class MemeViewFragment extends Fragment{
 	@Override
 	public void onResume(){
 		super.onResume();
+		type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/"+prefs.getString("font","Impact")+".ttf"); 
 		switch(Integer.parseInt(prefs.getString("fontColor", "1"))){
 		case 1: fontColor= Color.WHITE;
 			break;
@@ -129,9 +132,10 @@ public class MemeViewFragment extends Fragment{
 		}
 		
 		topView.setTextColor(fontColor);
+		topView.setTypeface(type);
 		bottomView.setTextColor(fontColor);
-		
-		switch(Integer.parseInt(prefs.getString("borderColor", "1"))){
+		bottomView.setTypeface(type);
+		switch(Integer.parseInt(prefs.getString("borderColor", "2"))){
 		case 1: borderColor= Color.WHITE;
 			break;
 		case 2: borderColor = Color.BLACK;
@@ -147,7 +151,7 @@ public class MemeViewFragment extends Fragment{
 		case 7: borderColor = Color.BLUE;
 			break;
 		default:
-			borderColor = Color.WHITE;
+			borderColor = Color.BLACK;
 		}
 		memeContainer.setBackgroundColor(borderColor);
 		
@@ -169,8 +173,8 @@ public class MemeViewFragment extends Fragment{
 		default:
 			shadowColor = Color.BLACK;
 		}
-		topView.setShadowLayer((float) 0.01, 2, 2,shadowColor);
-		bottomView.setShadowLayer((float) 0.01, 2, 2,shadowColor);
+		topView.setShadowLayer((float) 20, 0, 0,shadowColor);
+		bottomView.setShadowLayer((float) 20, 0, 0,shadowColor);
 		
 		if(prefs.getBoolean("capCheckBox", true)){
 			topView.setAllCaps(true);
@@ -199,6 +203,14 @@ public class MemeViewFragment extends Fragment{
 			RelativeLayout.LayoutParams paramsBottom = (RelativeLayout.LayoutParams)bottomView.getLayoutParams();
 			paramsBottom.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 			bottomView.setLayoutParams(paramsBottom);
+		}
+		if(prefs.getBoolean("waterMarkCheckBox", false)){
+			waterMark.setVisibility(View.VISIBLE);
+			waterMark.setText(prefs.getString("waterMarkEditText", "BUM"));
+			waterMark.setTextSize(TypedValue.COMPLEX_UNIT_SP,Integer.parseInt(prefs.getString("waterMarkSize", "50")));
+		}
+		if(!prefs.getBoolean("waterMarkCheckBox", false)){
+			waterMark.setVisibility(View.INVISIBLE);
 		}
 		
 		
@@ -259,10 +271,11 @@ public class MemeViewFragment extends Fragment{
 		}
 		
 		
+		waterMark = (TextView) v.findViewById(R.id.waterMarkTextView);
 		
+		waterMark.setVisibility(View.INVISIBLE);
 		topView = (TextView)v.findViewById(R.id.top_text);
-		Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/impact.ttf"); 
-		topView.setTypeface(type);
+		
 		topView.setText(topViewText);
 		topView.setTextSize(TypedValue.COMPLEX_UNIT_SP ,topViewSize);
 		
@@ -682,13 +695,6 @@ public class MemeViewFragment extends Fragment{
 		 getActivity().setResult(Activity.RESULT_OK, i);
 	 }
 	 
-	 public boolean tempChecker(String name){
-		 for(Meme meme:MemeLab.get(getActivity()).getCustomMemes()){
-			 if(meme.getName() == name){
-				 return true;}
 	 
-		 }
-		 return false;
-	 }
 	
 }

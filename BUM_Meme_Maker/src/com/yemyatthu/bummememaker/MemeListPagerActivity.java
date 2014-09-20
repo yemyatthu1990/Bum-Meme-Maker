@@ -21,7 +21,7 @@ public class MemeListPagerActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.listPager);
-		mViewPager.setOffscreenPageLimit(2);
+		mViewPager.setOffscreenPageLimit(3);
 		setContentView(mViewPager);
 		
 		final ActionBar actionBar = getActionBar();

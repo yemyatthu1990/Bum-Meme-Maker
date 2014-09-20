@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="FontList">
+        <item>Impact</item>
+        <item>Comic</item>
+        <item>Zawgyi</item>
+    </string-array>
     <string-array name="colorListArray">
         <item>White</item>
         <item>Black</item>
@@ -21,14 +26,19 @@
     </string-array>
     
     <string-array name="sizeListArray">
-        <item>small</item>
-        <item>medium</item>
-        <item>large</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
     </string-array>
     
-    <string-array name="sizeListValue">
+    <string-array name="borderSizeListValue">
         <item>60</item>
         <item>80</item>
         <item>100</item>
+    </string-array>
+      <string-array name="waterMarkSizeListValue">
+        <item>30</item>
+        <item>50</item>
+        <item>70</item>
     </string-array>
 </resources>

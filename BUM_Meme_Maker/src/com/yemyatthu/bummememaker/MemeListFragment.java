@@ -1,6 +1,7 @@
 package com.yemyatthu.bummememaker;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -49,13 +50,17 @@ import android.widget.Toast;
 	private ArrayList<Meme> mMyanmarMemes;
 	private ArrayList<Meme> mCustomMemes;
 	private LruCache<String,Bitmap> mMemoryCache;
+
+	private final Object mDiskCacheLock = new Object();
+	private boolean mDiskCacheStarting = true;
+	private static final String DISK_CACHE_SUBDIR="memethumbnails";
+	private static final int DISK_CACHE_SIZE = 1024*1024*80;
 	private static final int SELECT_PICTURE = 6;
 	private String selectedImagePath;
 	public static final String IMAGE_PATH = "com.yemyatthu.mememaker.IMAGE";
 	public static final String TAB_ID = "com.yemyatthu.bummememaker.TAB";
 	public static final int FAVORITE_REQUEST =10;
 	public static final int CUSTOM_ID = 1;
-	private static final String AsyncDrawble = null;
 	public int pos;
 	
 	
@@ -70,6 +75,7 @@ import android.widget.Toast;
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		File cacheDir = new File(getActivity().getCacheDir()+File.separator+DISK_CACHE_SUBDIR);
 		final int maxMemory = (int) (Runtime.getRuntime().maxMemory()/1024);
 		final int cacheSize = maxMemory/2;
 		mMemoryCache = new LruCache<String,Bitmap>(cacheSize){
@@ -194,44 +200,7 @@ import android.widget.Toast;
 			}
 		}
 	
-		private void makeThumbnail(ImageView img,String name){
-			 byte[] imageData = null;
-			 
-			 if(mMemes.contains(MemeLab.get(getActivity()).getMeme(name))||mMyanmarMemes.contains(MemeLab.get(getActivity()).getMeme(name))){
-			    try 
-			    {
-			    InputStream is = getResources().openRawResource(getResources().getIdentifier(name , "drawable",getActivity().getPackageName()));
-			    Bitmap imageBitmap = BitmapFactory.decodeStream(is);
-
-			   
-			    imageBitmap = Bitmap.createScaledBitmap(imageBitmap,160 ,160, false);
-
-			    ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-			    imageBitmap.compress(Bitmap.CompressFormat.WEBP, 0, baos);
-			    imageData = baos.toByteArray();
-			    img.setImageBitmap(imageBitmap);
-			    }
-			    catch(Exception ex) {
-
-			    }
-			}
-			
-			 if (mCustomMemes.contains(MemeLab.get(getActivity()).getMeme(name))){
-
-				 Bitmap imageBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().toString()+MemeViewFragment.templateMeme+
-						name+".jpg");
-				
-				 imageBitmap = Bitmap.createScaledBitmap(imageBitmap, 160, 160, false);
-				 ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-				    imageBitmap.compress(Bitmap.CompressFormat.WEBP, 0, baos);
-				    imageData = baos.toByteArray();
-				    img.setImageBitmap(imageBitmap);
-			 		}
-			 		
-		}
-			
-			
-
+		
 			}
 	
 		
@@ -390,7 +359,7 @@ import android.widget.Toast;
 		
 	}
 	static class AsyncDrawable extends BitmapDrawable{
-		private final WeakReference<BitmapWorkerTask>bitmapWorkerTaskReference;
+		private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
 		public AsyncDrawable(Resources res,Bitmap bitmap, BitmapWorkerTask bitmapWorkerTask){
 			super(res,bitmap);
 			bitmapWorkerTaskReference = new WeakReference<BitmapWorkerTask>(bitmapWorkerTask);
@@ -429,4 +398,16 @@ import android.widget.Toast;
 		    }
 		    return null;
 		}
+	private class InitDiskCacheTask extends AsyncTask<File, Void, Void>{
+
+		@Override
+		protected Void doInBackground(File... params) {
+			// TODO Auto-generated method stub
+			synchronized (mDiskCacheLock) {
+				
+			}
+			return null;
+		}
+		
+	}
 }

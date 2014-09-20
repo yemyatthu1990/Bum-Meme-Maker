@@ -9,12 +9,14 @@ package com.yemyatthu.bummememaker;
 
 public final class R {
     public static final class array {
-        public static final int colorListArray=0x7f050000;
-        public static final int colorListValue=0x7f050001;
-        public static final int meme_list=0x7f050004;
-        public static final int myanmar_meme_list=0x7f050005;
-        public static final int sizeListArray=0x7f050002;
-        public static final int sizeListValue=0x7f050003;
+        public static final int FontList=0x7f050000;
+        public static final int borderSizeListValue=0x7f050004;
+        public static final int colorListArray=0x7f050001;
+        public static final int colorListValue=0x7f050002;
+        public static final int meme_list=0x7f050006;
+        public static final int myanmar_meme_list=0x7f050007;
+        public static final int sizeListArray=0x7f050003;
+        public static final int waterMarkSizeListValue=0x7f050005;
     }
     public static final class attr {
     }
@@ -165,14 +167,14 @@ public final class R {
     }
     public static final class id {
         public static final int about_container=0x7f070001;
-        public static final int about_menu=0x7f07001e;
+        public static final int about_menu=0x7f07001f;
         public static final int about_text_view=0x7f070007;
-        public static final int add_template=0x7f07001a;
+        public static final int add_template=0x7f07001b;
         public static final int bottom_edit_text=0x7f07000f;
-        public static final int bottom_text=0x7f070017;
+        public static final int bottom_text=0x7f070018;
         public static final int content_frame=0x7f070003;
         public static final int drawer_layout=0x7f070002;
-        public static final int favorite_checkBox=0x7f070018;
+        public static final int favorite_checkBox=0x7f070019;
         public static final int font_minus1=0x7f07000e;
         public static final int font_minus2=0x7f070011;
         public static final int font_plus1=0x7f07000d;
@@ -183,19 +185,20 @@ public final class R {
         public static final int left_drawer=0x7f070004;
         public static final int linear_field=0x7f070013;
         public static final int listPager=0x7f070000;
-        public static final int make_meme=0x7f070019;
+        public static final int make_meme=0x7f07001a;
         public static final int memeView_container=0x7f070014;
         public static final int meme_Box=0x7f070012;
         public static final int meme_name_view=0x7f07000b;
         public static final int meme_view=0x7f070015;
-        public static final int open_image=0x7f07001f;
+        public static final int open_image=0x7f070020;
         public static final int relatvie_layout_meme_list=0x7f070009;
-        public static final int save_name_edit=0x7f07001b;
-        public static final int settings_menu=0x7f07001d;
-        public static final int splash_screen=0x7f07001c;
+        public static final int save_name_edit=0x7f07001c;
+        public static final int settings_menu=0x7f07001e;
+        public static final int splash_screen=0x7f07001d;
         public static final int thumbnail_view=0x7f07000a;
         public static final int top_edit_text=0x7f07000c;
-        public static final int top_text=0x7f070016;
+        public static final int top_text=0x7f070017;
+        public static final int waterMarkTextView=0x7f070016;
     }
     public static final class layout {
         public static final int activity_about_view=0x7f030000;

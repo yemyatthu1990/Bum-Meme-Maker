@@ -12,6 +12,7 @@
 	android:layout_width="match_parent"
 	android:singleLine="true"
 	android:freezesText="true"
+	android:maxLines="3"
 	android:layout_alignParentTop="true"
 	android:layout_toLeftOf="@+id/font_plus1"
 	android:hint="@string/hint_top_text"/>
@@ -45,6 +46,7 @@
 	android:layout_width="match_parent"
 	android:singleLine="true"
 	android:freezesText="true"
+	android:maxLines="3"
 	android:layout_below="@id/top_edit_text"
 	android:layout_toLeftOf="@+id/font_plus2"
 	android:hint="@string/hint_bottom_text"	/>
@@ -89,16 +91,38 @@
 	    android:layout_centerInParent="true"
 	    android:gravity="center"
 	    >
+	 
 
 	<ImageView
 	    android:id="@+id/meme_view"
-	
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:contentDescription="@string/meme_view"
-	    android:layout_centerInParent="true"
+		
 	    android:adjustViewBounds="true"
-	    android:scaleType="fitXY"/>    
+	    android:scaleType="fitXY"/>
+	
+	<TextView
+	    android:id="@+id/waterMarkTextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+
+	    android:layout_alignRight="@id/meme_view"
+	    android:layout_alignBottom="@id/meme_view"
+	    android:layout_marginRight = "15dp"
+	    android:layout_marginBottom = "80dp"
+	    android:rotation="320"
+	    android:textColor="@android:color/white"
+	    android:shadowColor="#000000"
+	    android:shadowDx="3"
+	    android:shadowDy="3"
+	    android:shadowRadius="5"	    
+	    android:alpha="0.3"
+	    android:ellipsize="middle"
+	    android:textStyle="bold"
+	    android:typeface="serif"
+	    />    
+	
 	<TextView
 	    android:id="@+id/top_text"
 	    android:layout_width="wrap_content"
@@ -112,10 +136,6 @@
 	    android:textStyle="bold"
 	    android:textAllCaps="true"
 	    android:gravity="center_horizontal"
-	    android:shadowColor="#000000"
-	    android:shadowDx="3"
-	    android:shadowDy="3"
-	    android:shadowRadius="5"
 	    android:layout_centerHorizontal="true"
 	    android:textColor="#FFFFFF" />
 
@@ -132,13 +152,12 @@
 	    android:textAllCaps="true"
 	    android:textStyle="bold"	    
 	    android:gravity="center_horizontal"
-	    android:shadowColor="#000000"
-	    android:shadowDx="3"
-	    android:shadowDy="3"
-	    android:shadowRadius="5"
 	    android:layout_centerHorizontal="true"
 	    android:textColor="#FFFFFF"/>
+
 	</RelativeLayout>
+
+
 
 </RelativeLayout>
 
@@ -156,6 +175,7 @@
 		    android:layout_height="wrap_content"
 		  	android:layout_centerInParent="true"
 		    android:fadingEdge="horizontal|vertical"
+		    android:padding="4dp"
 		    android:text="@string/favorite_button"
 		    android:textAlignment="center" />
 

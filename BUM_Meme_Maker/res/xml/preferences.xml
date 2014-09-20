@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ListPreference 
+        android:key="font"
+        android:title="Font"
+        
+        android:summary="Choose font \n(If you can't see Burmese font properly, Please choose Zawgyi)."
+    	android:defaultValue="Impact"
+    	android:entries="@array/FontList"
+    	android:entryValues="@array/FontList"/>
+        />
     <ListPreference
         android:key="fontColor"
         android:title="Font color"
@@ -7,21 +16,11 @@
     	android:defaultValue="1"
     	android:entries="@array/colorListArray"
     	android:entryValues="@array/colorListValue"/>
-    <ListPreference 
-        android:key="borderColor"
-        android:title="Border Bar color"
-        android:summary="Select the color for the border bar."
-        android:defaultValue="1"
-        android:entries="@array/colorListArray"
-        android:entryValues="@array/colorListValue"/>
+  
     
-    <ListPreference 
-        android:key = "borderSize"
-        android:title="Border Bar size"
-        android:summary="Select the size for the border bar."
-        android:defaultValue="60"
-        android:entries="@array/sizeListArray"
-        android:entryValues="@array/sizeListValue"/>
+    
+    
+    
     <ListPreference 
         android:key="shadowColor"
         android:title="Text shadow color"
@@ -45,6 +44,50 @@
         android:summaryOn="Disable border bar"
         android:summaryOff ="Enable border bar"
         android:defaultValue="false"/>
+    
+      <ListPreference 
+        android:key="borderColor"
+        android:title="Border Bar color"
+        android:dependency="borderBarCheckBox"
+        android:summary="Select the color for the border bar."
+        android:defaultValue="2"
+        android:entries="@array/colorListArray"
+        android:entryValues="@array/colorListValue"/>
+      
+      
+    <ListPreference 
+        android:key = "borderSize"
+        android:dependency="borderBarCheckBox"
+        android:title="Border Bar size"
+        android:summary="Select the size for the border bar."
+        android:defaultValue="60"
+        android:entries="@array/sizeListArray"
+        android:entryValues="@array/borderSizeListValue"/>
+    
+    <CheckBoxPreference
+        android:key = "waterMarkCheckBox"
+        android:title = "Water Mark"
+        android:summaryOn="Disable Water Mark"
+        android:summaryOff="Enable Water Mark"
+        android:defaultValue="false"/>
+    <EditTextPreference 
+        android:key="waterMarkEditText"
+        android:title="Water Mark name"
+        android:summary="Please Input Water Mark Name."
+        android:defaultValue="BUM"
+        android:dialogTitle="Water Mark Name"
+        android:dialogIcon="@android:drawable/ic_menu_info_details"
+        android:dependency="waterMarkCheckBox"/>
+    
+     <ListPreference 
+        android:key = "waterMarkSize"
+        android:title="Water Mark size"
+        android:summary="Select the size for water mark."
+        android:defaultValue="50"
+        android:entries="@array/sizeListArray"
+        android:dependency="waterMarkCheckBox"
+        android:entryValues="@array/waterMarkSizeListValue"/>
+        
     
 
 </PreferenceScreen>
