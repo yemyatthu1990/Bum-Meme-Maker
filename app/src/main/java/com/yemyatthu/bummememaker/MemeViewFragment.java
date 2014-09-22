@@ -107,7 +107,7 @@ public class MemeViewFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/"+prefs.getString("font","Impact")+".ttf"); // This need to be fix
+    type = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Zawgyi.ttf"); // This need to be fix
     switch (Integer.parseInt(prefs.getString("fontColor", "1"))) {
       case 1:
         fontColor = Color.WHITE;
