@@ -24,10 +24,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		prefs = getPreferenceManager().getSharedPreferences();
-		prefs.registerOnSharedPreferenceChangeListener(this);
-		
-	
+		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		addPreferencesFromResource(R.xml.preferences);
 		
 		
@@ -38,19 +35,26 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		super.onResume();
 		prefs.registerOnSharedPreferenceChangeListener(this);
 		ListPreference fontColor = (ListPreference) findPreference("fontColor");
-		fontColor.setSummary(prefs.getString(fontColorSummary,(String)fontColor.getSummary()));
+		if(fontColor.getSummary()!= null){
+		fontColor.setSummary(prefs.getString(fontColorSummary,(String)fontColor.getSummary()));}
 		ListPreference shadowColor = (ListPreference) findPreference("shadowColor");
-		shadowColor.setSummary(prefs.getString(shadowColorSummary,(String)shadowColor.getSummary()));
+		if(shadowColor.getSummary()!= null){
+		shadowColor.setSummary(prefs.getString(shadowColorSummary,(String)shadowColor.getSummary()));}
 		ListPreference borderColor = (ListPreference) findPreference("borderColor");
-		borderColor.setSummary(prefs.getString(borderColorSummary,(String)borderColor.getSummary()));
+		if(borderColor.getSummary()!= null){
+		borderColor.setSummary(prefs.getString(borderColorSummary,(String)borderColor.getSummary()));}
 		ListPreference waterMarkSize = (ListPreference) findPreference("waterMarkSize");
-		waterMarkSize.setSummary(prefs.getString(waterMarkSizeSummary,(String)waterMarkSize.getSummary()));
+		if(waterMarkSize.getSummary()!= null){
+		waterMarkSize.setSummary(prefs.getString(waterMarkSizeSummary,(String)waterMarkSize.getSummary()));}
 		ListPreference borderSize = (ListPreference) findPreference("borderSize");
-		borderSize.setSummary(prefs.getString(borderSizeSummary,(String)borderSize.getSummary()));
+		if(borderSize.getSummary()!= null){
+		borderSize.setSummary(prefs.getString(borderSizeSummary,(String)borderSize.getSummary()));}
 		ListPreference font = (ListPreference) findPreference("font");
-		font.setSummary(prefs.getString(fontSummary,(String)font.getSummary()));
+		if(font.getSummary()!= null){
+		font.setSummary(prefs.getString(fontSummary,(String)font.getSummary()));}
 		EditTextPreference waterMark = (EditTextPreference) findPreference("waterMarkEditText");
-		waterMark.setSummary(prefs.getString(waterMarkSummary,(String)waterMark.getSummary()));
+		if(waterMark.getSummary()!= null){
+		waterMark.setSummary(prefs.getString(waterMarkSummary,(String)waterMark.getSummary()));}
 	}
 	
 	@Override
@@ -148,11 +152,11 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		}
 		if(key.equals("borderSize")){
 			switch(Integer.parseInt(sharedPreferences.getString(key, "60"))){
-					case 60: pref.setSummary("Small");
+					case 40: pref.setSummary("Small");
 						break;
-					case 80: pref.setSummary("Medium");
+					case 60: pref.setSummary("Medium");
 						break;
-					case 100: pref.setSummary("Large");
+					case 80: pref.setSummary("Large");
 						break;
 					default: break;
 				

@@ -38,9 +38,10 @@ limitations under the License.</string>
     <string name="save_custom_meme">YourMeme</string>
     <string name="favorite_meme_title">Favorite Memes</string>
     <string name="favorite_button">Favorite</string>
-    <string name="myanmar_meme_title">Myanmar Memes</string>
+    <string name="myanmar_meme_title">Burmese Memes</string>
     <string name="add_template">Add</string>
     <string name="add_confirm">Are you sure you want to add this to template?</string>
     <string name="custom_meme_title">Custom Memes</string>
-    <string name="empty_list">Meme List is empty. Please add some.</string>
+    <string name="empty_list">No Meme Found!</string>
+    <string name="search_menu">Search</string>
 </resources>

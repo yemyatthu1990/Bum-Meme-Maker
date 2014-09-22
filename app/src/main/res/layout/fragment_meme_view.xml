@@ -98,7 +98,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:contentDescription="@string/meme_view"
-		
+		android:layout_centerInParent="true"
 	    android:adjustViewBounds="true"
 	    android:scaleType="fitXY"/>
 	
@@ -118,7 +118,6 @@
 	    android:shadowDy="3"
 	    android:shadowRadius="5"	    
 	    android:alpha="0.3"
-	    android:ellipsize="middle"
 	    android:textStyle="bold"
 	    android:typeface="serif"
 	    />    
@@ -138,6 +137,21 @@
 	    android:gravity="center_horizontal"
 	    android:layout_centerHorizontal="true"
 	    android:textColor="#FFFFFF" />
+	<TextView
+	    android:id="@+id/top_text_outline"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@id/meme_view"
+	    android:layout_alignRight="@id/meme_view"
+	    android:layout_alignTop="@id/meme_view"
+	
+	    android:maxLines="3"
+	    android:padding = "6sp"
+	    android:textStyle="bold"
+	    android:textAllCaps="true"
+	    android:gravity="center_horizontal"
+	    android:layout_centerHorizontal="true"
+	    android:textColor="#000000" />
 
 	<TextView
 	    android:id="@+id/bottom_text"
@@ -154,6 +168,21 @@
 	    android:gravity="center_horizontal"
 	    android:layout_centerHorizontal="true"
 	    android:textColor="#FFFFFF"/>
+	<TextView
+	    android:id="@+id/bottom_text_outline"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@id/meme_view"
+	    android:layout_alignRight="@id/meme_view"
+	    android:layout_alignBottom="@id/meme_view"
+	    
+	    android:maxLines="3"
+	    android:padding="6sp"
+	    android:textAllCaps="true"
+	    android:textStyle="bold"	    
+	    android:gravity="center_horizontal"
+	    android:layout_centerHorizontal="true"
+	    android:textColor="#000000"/>
 
 	</RelativeLayout>
 

@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,9 +17,11 @@ import android.widget.Toast;
 public class MemeListPagerActivity extends FragmentActivity {
 	
 	private ViewPager mViewPager;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.listPager);
 		mViewPager.setOffscreenPageLimit(3);

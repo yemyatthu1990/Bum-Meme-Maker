@@ -8,7 +8,7 @@
     	android:defaultValue="Impact"
     	android:entries="@array/FontList"
     	android:entryValues="@array/FontList"/>
-        />
+       
     <ListPreference
         android:key="fontColor"
         android:title="Font color"

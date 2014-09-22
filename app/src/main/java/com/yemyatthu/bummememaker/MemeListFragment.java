@@ -1,66 +1,56 @@
 package com.yemyatthu.bummememaker;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Locale;
 
 import org.json.JSONException;
 
-import android.R.color;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ListFragment;
-import android.util.LruCache;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnAttachStateChangeListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
  class MemeListFragment extends ListFragment{
+	private EditText txtSearch;
 	private Meme mainMeme;
-	private Bitmap mPlaceHolderBitmap;
+	private EditText mSearch;
+	private ArrayAdapter<String> memeNames;
+	private ArrayAdapter<Meme> adapter;
 	private ArrayList<Meme> mMemes;
 	private ArrayList<Meme> mFavoriteMemes;
 	private ArrayList<Meme> mMyanmarMemes;
 	private ArrayList<Meme> mCustomMemes;
-	private LruCache<String,Bitmap> mMemoryCache;
-
-	private final Object mDiskCacheLock = new Object();
-	private boolean mDiskCacheStarting = true;
-	private static final String DISK_CACHE_SUBDIR="memethumbnails";
-	private static final int DISK_CACHE_SIZE = 1024*1024*80;
 	private static final int SELECT_PICTURE = 6;
 	private String selectedImagePath;
 	public static final String IMAGE_PATH = "com.yemyatthu.mememaker.IMAGE";
 	public static final String TAB_ID = "com.yemyatthu.bummememaker.TAB";
 	public static final int FAVORITE_REQUEST =10;
 	public static final int CUSTOM_ID = 1;
+	private int tabPos;
 	public int pos;
 	
 	
@@ -75,44 +65,38 @@ import android.widget.Toast;
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		File cacheDir = new File(getActivity().getCacheDir()+File.separator+DISK_CACHE_SUBDIR);
-		final int maxMemory = (int) (Runtime.getRuntime().maxMemory()/1024);
-		final int cacheSize = maxMemory/2;
-		mMemoryCache = new LruCache<String,Bitmap>(cacheSize){
-			@Override
-			protected int sizeOf(String key, Bitmap bitmap){
-				return bitmap.getByteCount()/1024;
-			}
-		};
-			
 		
 		mMemes = MemeLab.get(getActivity()).getMemes();
 		mFavoriteMemes = MemeLab.get(getActivity()).getFavoriteMemes();
 		mMyanmarMemes = MemeLab.get(getActivity()).getMyanmarMemes();
 		mCustomMemes = MemeLab.get(getActivity()).getCustomMemes();
-		if(getArguments().getInt(TAB_ID)==0){
-			ArrayAdapter<Meme> adapter = new MemeAdapter(mMemes);
+		tabPos = getArguments().getInt(TAB_ID);
+		if(tabPos==0){
+			adapter = new MemeAdapter(mMemes);
 		setListAdapter(adapter);}
-		if(getArguments().getInt(TAB_ID)==2){
-			ArrayAdapter<Meme> adapter1 = new MemeAdapter(mFavoriteMemes);
-			setListAdapter(adapter1);
+		if(tabPos==2){
+			adapter = new MemeAdapter(mFavoriteMemes);
+			setListAdapter(adapter);
+
 		}
-		if(getArguments().getInt(TAB_ID)==1){
-			ArrayAdapter<Meme> adapter1 = new MemeAdapter(mMyanmarMemes);
-			setListAdapter(adapter1);
+		if(tabPos==1){
+			adapter = new MemeAdapter(mMyanmarMemes);
+			setListAdapter(adapter);
+		
 		}
-		if(getArguments().getInt(TAB_ID)==3){
-			ArrayAdapter<Meme> adapter1 = new MemeAdapter(mCustomMemes);
-			setListAdapter(adapter1);
-		}
-	
-	
+		if(tabPos==3){
+			adapter = new MemeAdapter(mCustomMemes);
+			setListAdapter(adapter);}
+		
+		
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		View v = inflater.inflate(R.layout.list_view, null);
+		
 		return v;
+		
 	}
 	@Override 
 	public void onPause(){
@@ -140,9 +124,10 @@ import android.widget.Toast;
 	
 	@Override
 	public void onListItemClick (ListView l, View v, int position, long id){
-		Intent i = new Intent(getActivity(),MemeViewActivity.class);
+		Intent i = new Intent(getActivity(),MemeViewPagerActivity.class);
 		Meme meme = ((MemeAdapter)getListAdapter()).getItem(position);
 		i.putExtra(MemeViewFragment.NAME_TAG,meme.getName());
+		i.putExtra(MemeViewPagerActivity.TAB_TAG, tabPos);
 		startActivityForResult(i, FAVORITE_REQUEST);
 		pos =position;
 	}
@@ -183,25 +168,42 @@ import android.widget.Toast;
 			return convertView;
 		}
 		
-		private void loadBitmap(String path,ImageView view){
-			final String imageKey = path;
-			final Bitmap bitmap = getBitmapFromMemCache(imageKey);
-			if(bitmap != null){
-				view.setImageBitmap(bitmap);
-			}
-			else{
-			if(cancelPotentialWork(path,view)){
-				final BitmapWorkerTask task = new BitmapWorkerTask(view);
-				final AsyncDrawable asyncDrawable = new AsyncDrawable(getResources(),mPlaceHolderBitmap,task);
-				view.setImageDrawable(asyncDrawable);
-				task.execute(path);
-			}
+	
+		public void notifyDataSetChanged() {
+		    super.notifyDataSetChanged();
 			
-			}
 		}
+	}
+		private void loadBitmap(String path,ImageView view){
+		
+			if(mMemes.contains(MemeLab.get(getActivity()).getMeme(path))||mMyanmarMemes.contains(MemeLab.get(getActivity()).getMeme(path))){
+				Picasso.with(getActivity())
+				.load( getResources().getIdentifier(path , "drawable",getActivity().getPackageName()))
+				.placeholder(android.R.drawable.picture_frame)
+				.resize(160, 160)
+				.into(view);
+				    
+			 }
+			 
+			 if (mCustomMemes.contains(MemeLab.get(getActivity()).getMeme(path))){
+				 File file = null;
+					try{
+						file = new File(Environment.getExternalStorageDirectory().toString()+MemeViewFragment.
+								templateMeme+path+".jpg");
+					}catch(Exception e){
+						Toast.makeText(getActivity(), "file not found", Toast.LENGTH_LONG).show();
+					}
+				 Picasso.with(getActivity())
+					.load( file)
+					.placeholder(android.R.drawable.picture_frame)
+					.resize(160, 160)
+					.into(view);
+			 }
+			}
+		
 	
 		
-			}
+	
 	
 		
 		
@@ -214,7 +216,62 @@ import android.widget.Toast;
 		// Inflate the menu; this adds items to the action bar if it is present.
 	 	super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.meme_view, menu);
-	}
+		View v = (View) menu.findItem(R.id.search_menu).getActionView();
+		 
+		txtSearch = ( EditText ) v.findViewById(R.id.search_edit);
+		 
+        /** Setting an action listener */
+        txtSearch.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int arg1, int arg2,
+					int arg3) {
+				// TODO Auto-generated method stub
+				ArrayList<Meme> temp = new ArrayList<Meme>();
+			for(int i =0;i<adapter.getCount();i++){
+				if(adapter.getItem(i).getName().contains(s.toString().toLowerCase(Locale.ENGLISH))){
+					
+					temp.add(adapter.getItem(i));
+					
+				}
+				
+			}
+			ArrayAdapter<Meme> tempAdapter = new MemeAdapter(temp);
+			setListAdapter(tempAdapter);
+			
+		
+			}
+		
+			
+	});
+        txtSearch.addOnAttachStateChangeListener(new OnAttachStateChangeListener(){
+
+			@Override
+			public void onViewAttachedToWindow(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onViewDetachedFromWindow(View v) {
+				// TODO Auto-generated method stub
+				txtSearch.setText("");
+			}
+        	
+        });
+}
 @Override
 	public boolean onOptionsItemSelected(MenuItem item){
 	 switch(item.getItemId()){
@@ -256,7 +313,7 @@ import android.widget.Toast;
 		if (requestCode == SELECT_PICTURE){
 			Uri selectedImageUri = data.getData();
 			selectedImagePath = getPath(selectedImageUri);
-			Intent i = new Intent(getActivity(),MemeViewActivity.class);
+			Intent i = new Intent(getActivity(),MemeViewPagerActivity.class);
 			i.putExtra(MemeViewFragment.NAME_TAG,selectedImagePath );
 			startActivityForResult(i,CUSTOM_ID);
 		}
@@ -272,7 +329,6 @@ import android.widget.Toast;
 		}
 		if(requestCode == FAVORITE_REQUEST){
 			
-			Toast.makeText(getActivity(),"just have enought sence",Toast.LENGTH_LONG).show();
 			
 			boolean isChecked = data.getBooleanExtra(MemeViewFragment.FAVORITE_RESULT, false);
 			Meme meme = ((MemeAdapter)getListAdapter()).getItem(pos);
@@ -296,118 +352,6 @@ import android.widget.Toast;
 		
 	}
 	
-	public void addBitmapToMemeoryCache(String key,Bitmap bitmap){
-		if(getBitmapFromMemCache(key)==null){
-			mMemoryCache.put(key, bitmap);
-		}
-	}
 	
-	public Bitmap getBitmapFromMemCache(String key){
-		return mMemoryCache.get(key);
-	}
-	private class BitmapWorkerTask extends AsyncTask<String,Void,Bitmap>{
-		private final WeakReference<ImageView> imageViewReference;
-		private String path = null;
-		
-		public BitmapWorkerTask(ImageView imageView){
-			
-			imageViewReference = new WeakReference<ImageView>(imageView);
-		}
-		@Override
-		protected Bitmap doInBackground(String... params) {
-			path = params[0];
-			Bitmap bitmap = null;
-			 if(mMemes.contains(MemeLab.get(getActivity()).getMeme(path))||mMyanmarMemes.contains(MemeLab.get(getActivity()).getMeme(path))){
-				 InputStream is = getResources().openRawResource(getResources().getIdentifier(path , "drawable",getActivity().getPackageName()));
-				    Bitmap imageBitmap = BitmapFactory.decodeStream(is);
-
-				   
-				    imageBitmap = Bitmap.createScaledBitmap(imageBitmap,160 ,160, false);
-
-				    ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-				    imageBitmap.compress(Bitmap.CompressFormat.PNG, 2, baos);
-				    bitmap = imageBitmap;
-			 }
-			 
-			 if (mCustomMemes.contains(MemeLab.get(getActivity()).getMeme(path))){
-
-				 Bitmap imageBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().toString()+MemeViewFragment.templateMeme+
-						path+".jpg");
-				
-				 imageBitmap = Bitmap.createScaledBitmap(imageBitmap, 160, 160, false);
-				 ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-				    imageBitmap.compress(Bitmap.CompressFormat.PNG, 2, baos);
-				    bitmap = imageBitmap;}
-			addBitmapToMemeoryCache(path, bitmap);
-			return bitmap;
 		}
 		
-		@Override
-		protected void onPostExecute(Bitmap bitmap){
-			if(isCancelled()){
-				bitmap = null;
-			}
-			if(imageViewReference != null && bitmap != null){
-				final ImageView imageView = imageViewReference.get();
-				final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-				if(this == bitmapWorkerTask && imageView != null){
-					imageView.setImageBitmap(bitmap);
-				}
-			}
-			
-		}
-		
-	}
-	static class AsyncDrawable extends BitmapDrawable{
-		private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
-		public AsyncDrawable(Resources res,Bitmap bitmap, BitmapWorkerTask bitmapWorkerTask){
-			super(res,bitmap);
-			bitmapWorkerTaskReference = new WeakReference<BitmapWorkerTask>(bitmapWorkerTask);
-		}
-		
-		public BitmapWorkerTask getBitmapWorkerTask(){
-			return bitmapWorkerTaskReference.get();
-		}
-		
-	}
-	public static boolean cancelPotentialWork(String path, ImageView imageView) {
-	    final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-
-	    if (bitmapWorkerTask != null) {
-	        final String bitmapData = bitmapWorkerTask.path;
-	        // If bitmapData is not yet set or it differs from the new data
-	        if (bitmapData == null || !(bitmapData.equals( path))) {
-	            // Cancel previous task
-	            bitmapWorkerTask.cancel(true);
-	        } else {
-	            // The same work is already in progress
-	            return false;
-	        }
-	    }
-	    // No task associated with the ImageView, or an existing task was cancelled
-	    return true;
-	}
-	
-	private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
-		   if (imageView != null) {
-		       final Drawable drawable = imageView.getDrawable();
-		       if (drawable instanceof AsyncDrawable) {
-		           final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
-		           return asyncDrawable.getBitmapWorkerTask();
-		       }
-		    }
-		    return null;
-		}
-	private class InitDiskCacheTask extends AsyncTask<File, Void, Void>{
-
-		@Override
-		protected Void doInBackground(File... params) {
-			// TODO Auto-generated method stub
-			synchronized (mDiskCacheLock) {
-				
-			}
-			return null;
-		}
-		
-	}
-}
