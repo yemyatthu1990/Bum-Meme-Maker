@@ -107,7 +107,7 @@ public class MemeViewFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/"+prefs.getString("font","Impact")+".ttf"); // This need to be fix
+    type = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Zawgyi.ttf"); // This need to be fix
     switch (Integer.parseInt(prefs.getString("fontColor", "1"))) {
       case 1:
         fontColor = Color.WHITE;
@@ -215,10 +215,10 @@ public class MemeViewFragment extends Fragment {
       int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics());
       memeView.setPadding(width, width, width, width);
       RelativeLayout.LayoutParams paramsTop = (RelativeLayout.LayoutParams) topView.getLayoutParams();
-      paramsTop.removeRule(RelativeLayout.ALIGN_PARENT_TOP);
+      paramsTop.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
       topView.setLayoutParams(paramsTop);
       RelativeLayout.LayoutParams paramsBottom = (RelativeLayout.LayoutParams) bottomView.getLayoutParams();
-      paramsBottom.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+      paramsBottom.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
       bottomView.setLayoutParams(paramsBottom);
     }
     if (prefs.getBoolean("waterMarkCheckBox", false)) {
