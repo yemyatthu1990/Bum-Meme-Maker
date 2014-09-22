@@ -24,3 +24,6 @@ apply plugin: 'idea'
 dependencies {
 }
 apply plugin: 'idea'
+dependencies {
+}
+apply plugin: 'idea'
