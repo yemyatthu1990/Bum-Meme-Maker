@@ -14,7 +14,7 @@ Contributing
  4. Push to the branch (`git push origin my-new-feature`)
  5. Create new Pull Request
  
- License
+License
 --------
 
     Copyright 2014 Ye Myat Thu
