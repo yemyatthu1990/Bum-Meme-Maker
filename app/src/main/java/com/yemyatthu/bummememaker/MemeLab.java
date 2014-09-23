@@ -57,14 +57,14 @@ public class MemeLab {
 				meme.setName(name);
 				mCustomMemes.add(meme);
 			}
-		}catch(Exception e){
+		}catch(Exception ignored){
 			
 		}
 		mFavoriteMemes = new ArrayList<Meme>();
 		try{
 			for (String name: loadFavoriteMemes(FAVORITE_FILE_NAME)){
 				mFavoriteMemes.add(getMeme(name));}
-		}catch(Exception e){
+		}catch(Exception ignored){
 			
 		}
 	}
@@ -79,37 +79,12 @@ public class MemeLab {
 	}
 
 
-
-
-
-
-	public void setCustomMemes(ArrayList<Meme> customMemes) {
-		mCustomMemes = customMemes;
-	}
-
-
-
-
-
-
-	public ArrayList<Meme> getFavoriteMemes() {
+    public ArrayList<Meme> getFavoriteMemes() {
 		return mFavoriteMemes;
 	}
 
 
-
-
-	public void setFavoriteMemes(ArrayList<Meme> favoriteMemes) {
-		mFavoriteMemes = favoriteMemes;
-	}
-
-
-
-
-
-
-
-	public static MemeLab get(Context c){
+    public static MemeLab get(Context c){
 		if (sMemeLab==null){
 		sMemeLab = new MemeLab(c.getApplicationContext()) ;}
 		return sMemeLab;
@@ -153,7 +128,7 @@ public class MemeLab {
 			 JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue(); 
 			 for(int i =0;i<array.length();i++){
 				 favoriteMemes.add(array.getString(i));}
-			 }catch(Exception e){
+			 }catch(Exception ignored){
 					
 		}finally{
 			if(reader != null){

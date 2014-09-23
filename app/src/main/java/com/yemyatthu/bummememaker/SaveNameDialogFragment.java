@@ -10,9 +10,13 @@ import android.support.v4.app.DialogFragment;
 import android.view.View;
 
 public class SaveNameDialogFragment extends DialogFragment {
-	private View view;
-	public SaveNameDialogFragment(View v){
+	private static View view;
+	public static SaveNameDialogFragment getNewInstance(View v)
+    {
 		view = v;
+        SaveNameDialogFragment fragment  = new SaveNameDialogFragment();
+        return fragment;
+
 	}
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState){

@@ -37,16 +37,13 @@ import com.squareup.picasso.Picasso;
  class MemeListFragment extends ListFragment{
 	private EditText txtSearch;
 	private Meme mainMeme;
-	private EditText mSearch;
-	private ArrayAdapter<String> memeNames;
-	private ArrayAdapter<Meme> adapter;
+     private ArrayAdapter<Meme> adapter;
 	private ArrayList<Meme> mMemes;
 	private ArrayList<Meme> mFavoriteMemes;
 	private ArrayList<Meme> mMyanmarMemes;
 	private ArrayList<Meme> mCustomMemes;
 	private static final int SELECT_PICTURE = 6;
 	private String selectedImagePath;
-	public static final String IMAGE_PATH = "com.yemyatthu.mememaker.IMAGE";
 	public static final String TAB_ID = "com.yemyatthu.bummememaker.TAB";
 	public static final int FAVORITE_REQUEST =10;
 	public static final int CUSTOM_ID = 1;
@@ -93,9 +90,7 @@ import com.squareup.picasso.Picasso;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-		View v = inflater.inflate(R.layout.list_view, null);
-		
-		return v;
+		return inflater.inflate(R.layout.list_view, null);
 		
 	}
 	@Override 
@@ -297,8 +292,8 @@ import com.squareup.picasso.Picasso;
 		String res = null;
 		String[] projection = {MediaStore.Images.Media.DATA};
 		Cursor cursor = getActivity().getContentResolver().query(uri,projection,null,null,null);
-		if(cursor.moveToFirst()){;
-		int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+		if(cursor.moveToFirst()){
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 		res=cursor.getString(column_index);
 		}
 		cursor.close();

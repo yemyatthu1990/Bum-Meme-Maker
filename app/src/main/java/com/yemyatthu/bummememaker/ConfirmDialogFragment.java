@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 public class ConfirmDialogFragment extends DialogFragment{
-	public final String SEND_RESULT = "OK";
     public static final String TITLE_TAG = "com.yemyatthu.bummememaker.TITLE";
     public static final String MESSAGE_TAG = "com.yemyatthu.bummememaker.MESSAGE";
 	public static ConfirmDialogFragment getNewInstance(int message,int title)

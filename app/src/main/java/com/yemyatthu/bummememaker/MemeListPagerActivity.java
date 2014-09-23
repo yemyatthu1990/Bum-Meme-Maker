@@ -28,7 +28,10 @@ public class MemeListPagerActivity extends FragmentActivity {
 		setContentView(mViewPager);
 		
 		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        if (actionBar == null) {
+            throw new AssertionError();
+        }
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 			
 			
