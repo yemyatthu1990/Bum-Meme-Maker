@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin = "10dp"
+        android:padding = "4dp"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:scrollbars="vertical"
         android:text="@string/license" />
 

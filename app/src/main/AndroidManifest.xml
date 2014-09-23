@@ -40,7 +40,7 @@
         <activity
             android:name="com.yemyatthu.bummememaker.AboutViewActivity"
             android:label="@string/about_menu"
-            android:theme="@android:style/Theme.Dialog"
+            android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:excludeFromRecents="true"
             android:screenOrientation="sensorPortrait">
          
