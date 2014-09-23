@@ -1,12 +1,5 @@
 package com.yemyatthu.bummememaker;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Locale;
-
-import org.json.JSONException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,7 +9,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ListFragment;
-import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -34,6 +26,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Locale;
 
  class MemeListFragment extends ListFragment{
 	private EditText txtSearch;

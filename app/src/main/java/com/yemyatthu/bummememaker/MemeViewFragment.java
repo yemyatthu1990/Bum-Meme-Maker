@@ -48,7 +48,6 @@ public class MemeViewFragment extends Fragment {
   private String path;
   private String addName;
   private String saveName;
-  private String memeName;
   private int fontColor;
   private int borderColor;
   private int shadowColor;

@@ -1,9 +1,5 @@
 package com.yemyatthu.bummememaker;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Locale;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class MemeViewPagerActivity extends FragmentActivity {
 	

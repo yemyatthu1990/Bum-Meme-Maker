@@ -1,5 +1,11 @@
 package com.yemyatthu.bummememaker;
 
+import android.content.Context;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONTokener;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,15 +13,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONTokener;
-
-import android.content.Context;
 
 
 public class MemeLab {
