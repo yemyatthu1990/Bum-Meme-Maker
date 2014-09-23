@@ -29,13 +29,10 @@
 \nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 \nSee the License for the specific language governing permissions and
 \nlimitations under the License.</string>
-    <string name="help_meme">Explanation</string>
     <string name="meme_list_title">Popular Memes</string>
     <string name="name">Name</string>
     <string name="open_gallery">Add From Gallery</string>
     <string name="image_picker_title">Select Picture</string>
-    <string name="help_custom_image">You know more than me about your image!</string>
-    <string name="top_custom_example">No example for custom image!</string>
     <string name="save_custom_meme">YourMeme</string>
     <string name="favorite_meme_title">Favorite Memes</string>
     <string name="favorite_button">Favorite</string>
