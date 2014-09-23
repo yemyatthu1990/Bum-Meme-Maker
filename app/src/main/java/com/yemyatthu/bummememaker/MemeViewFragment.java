@@ -61,15 +61,11 @@ public class MemeViewFragment extends Fragment {
   private Button fontMinus2;
   private EditText topEdit;
   private int topViewSize;
-  private int topOutlineSize;
-  private int bottomOutlineSize;
   private int bottomViewSize;
   private EditText bottomEdit;
   private TextView waterMark;
   private TextView topView;
-  private TextView topOutlineView;
   private TextView bottomView;
-  private TextView bottomOutlineView;
   private ImageView memeView;
   private Bitmap bitmap;
   private ArrayList<Integer> restoredSize = new ArrayList<Integer>();
@@ -190,10 +186,8 @@ public class MemeViewFragment extends Fragment {
       default:
         shadowColor = Color.BLACK;
     }
-    topOutlineView.setTextColor(shadowColor);
-    topOutlineView.setTypeface(type);
-    bottomOutlineView.setTextColor(shadowColor);
-    bottomOutlineView.setTypeface(type);
+    topView.setShadowLayer((float)10,0,0,shadowColor);
+    bottomView.setShadowLayer((float)10,0,0,shadowColor);
 
     if (prefs.getBoolean("capCheckBox", true)) {
       topView.setAllCaps(true);
@@ -242,14 +236,10 @@ public class MemeViewFragment extends Fragment {
 
     prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     topViewSize = 25;
-    topOutlineSize = 30;
-    bottomOutlineSize = 30;
     bottomViewSize = 25;
     if (savedInstanceState != null) {
       topViewSize = savedInstanceState.getIntegerArrayList(ID_TAG).get(0);
-      topOutlineSize = savedInstanceState.getIntegerArrayList(ID_TAG).get(2);
       bottomViewSize = savedInstanceState.getIntegerArrayList(ID_TAG).get(1);
-      bottomOutlineSize = savedInstanceState.getIntegerArrayList(ID_TAG).get(3);
       topEditText = savedInstanceState.getStringArrayList(ID_TAG).get(0);
       bottomEditText = savedInstanceState.getStringArrayList(ID_TAG).get(1);
       topViewText = savedInstanceState.getStringArrayList(ID_TAG).get(2);
@@ -306,13 +296,11 @@ public class MemeViewFragment extends Fragment {
 
     waterMark.setVisibility(View.INVISIBLE);
     topView = (TextView) v.findViewById(R.id.top_text);
-    topOutlineView = (TextView) v.findViewById(R.id.top_text_outline);
 
     topView.setText(topViewText);
     topView.setTextSize(TypedValue.COMPLEX_UNIT_SP, topViewSize);
 
     bottomView = (TextView) v.findViewById(R.id.bottom_text);
-    bottomOutlineView = (TextView) v.findViewById(R.id.bottom_text_outline);
 
     bottomView.setTypeface(type);
     bottomView.setText(bottomViewText);
@@ -329,7 +317,6 @@ public class MemeViewFragment extends Fragment {
       @Override
       public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
         topView.setText(p1);
-        topOutlineView.setText(p1);
       }
 
       @Override
@@ -351,7 +338,7 @@ public class MemeViewFragment extends Fragment {
       @Override
       public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
         bottomView.setText(p1);
-        bottomOutlineView.setText(p1);
+
       }
 
       @Override
@@ -436,9 +423,6 @@ public class MemeViewFragment extends Fragment {
       public void onClick(View v) {
         topViewSize += 1;
         topView.setTextSize(topViewSize);
-        topOutlineSize += 1;
-        topOutlineView.setTextSize(topOutlineSize);
-
       }
 
     });
@@ -449,9 +433,8 @@ public class MemeViewFragment extends Fragment {
       @Override
       public void onClick(View v) {
         bottomViewSize += 1;
-        bottomOutlineSize += 1;
+
         bottomView.setTextSize(bottomViewSize);
-        bottomOutlineView.setTextSize(bottomViewSize);
 
       }
 
@@ -463,9 +446,7 @@ public class MemeViewFragment extends Fragment {
       @Override
       public void onClick(View v) {
         topViewSize -= 1;
-        topOutlineSize -= 1;
         topView.setTextSize(topViewSize);
-        topOutlineView.setTextSize(topOutlineSize);
 
       }
 
@@ -478,9 +459,7 @@ public class MemeViewFragment extends Fragment {
       public void onClick(View v) {
 
         bottomViewSize -= 1;
-        bottomOutlineSize -= 1;
         bottomView.setTextSize(bottomViewSize);
-        bottomOutlineView.setTextSize(bottomOutlineSize);
       }
 
     });
@@ -494,8 +473,6 @@ public class MemeViewFragment extends Fragment {
     super.onSaveInstanceState(outState);
     restoredSize.add((int) topView.getTextSize());
     restoredSize.add((int) bottomView.getTextSize());
-    restoredSize.add((int) topOutlineView.getTextSize());
-    restoredSize.add((int) bottomOutlineView.getTextSize());
     restoredText.add(topEdit.getText().toString());
     restoredText.add(bottomEdit.getText().toString());
     restoredText.add(topView.getText().toString());
