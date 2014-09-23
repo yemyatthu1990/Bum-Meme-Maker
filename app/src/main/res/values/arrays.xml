@@ -2,7 +2,7 @@
 <resources>
     <string-array name="FontList">
         <item>Impact</item>
-        <item>Comic</item>
+        <item>ComicSansMS</item>
         <item>Zawgyi</item>
     </string-array>
     <string-array name="colorListArray">
