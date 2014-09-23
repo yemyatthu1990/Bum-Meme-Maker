@@ -357,8 +357,7 @@ public class MemeViewFragment extends Fragment {
     }
 
     favoriteCheckBox.setChecked(MemeLab.get(getActivity()).getFavoriteMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)));
-    ;
-    favoriteCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+      favoriteCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
       @Override
       public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -487,7 +486,7 @@ public class MemeViewFragment extends Fragment {
     EditText edText = (EditText) view.findViewById(R.id.save_name_edit);
     edText.setText(R.string.save_custom_meme);
     addName = getResources().getString(R.string.save_custom_meme);
-    SaveNameDialogFragment snDialog = new SaveNameDialogFragment(view);
+    SaveNameDialogFragment snDialog = SaveNameDialogFragment.getNewInstance(view);
     snDialog.setTargetFragment(MemeViewFragment.this, REQUEST_CODE5);
 
     snDialog.show(fm, CONFIRM);
@@ -528,7 +527,7 @@ public class MemeViewFragment extends Fragment {
       edText.setText(R.string.save_custom_meme);
       saveName = getResources().getString(R.string.save_custom_meme);
     }
-    SaveNameDialogFragment snDialog = new SaveNameDialogFragment(view);
+    SaveNameDialogFragment snDialog = SaveNameDialogFragment.getNewInstance(view);
     snDialog.show(fm, CONFIRM);
     snDialog.setTargetFragment(MemeViewFragment.this, REQUEST_CODE3);
     edText.addTextChangedListener(new TextWatcher() {
@@ -567,8 +566,8 @@ public class MemeViewFragment extends Fragment {
     File newDir = new File(root + dir);
     newDir.mkdirs();
 
-    File file = new File(newDir, name + ".jpg");
-    return file;
+
+    return new File(newDir, name + ".jpg");
   }
 
   public void checkName(File file) {
@@ -590,7 +589,7 @@ public class MemeViewFragment extends Fragment {
       out.flush();
       out.close();
       Toast.makeText(getActivity(), "Added as " + file.getPath(), Toast.LENGTH_LONG).show();
-    } catch (Exception e) {
+    } catch (Exception ignored) {
 
     }
   }
@@ -614,7 +613,7 @@ public class MemeViewFragment extends Fragment {
             public void onScanCompleted(String path, Uri uri) {
             }
           });
-    } catch (Exception e) {
+    } catch (Exception ignored) {
 
     }
   }
@@ -696,8 +695,7 @@ public class MemeViewFragment extends Fragment {
     String[] projection = {MediaStore.Images.Media.DATA};
     Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
     if (cursor.moveToFirst()) {
-      ;
-      int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
       res = cursor.getString(column_index);
     }
     cursor.close();
