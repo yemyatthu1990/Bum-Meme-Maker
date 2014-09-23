@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -62,7 +63,6 @@ import com.squareup.picasso.Picasso;
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		
 		mMemes = MemeLab.get(getActivity()).getMemes();
 		mFavoriteMemes = MemeLab.get(getActivity()).getFavoriteMemes();
 		mMyanmarMemes = MemeLab.get(getActivity()).getMyanmarMemes();
@@ -211,6 +211,7 @@ import com.squareup.picasso.Picasso;
 		// Inflate the menu; this adds items to the action bar if it is present.
 	 	super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.meme_view, menu);
+
 		View v = (View) menu.findItem(R.id.search_menu).getActionView();
 		 
 		txtSearch = ( EditText ) v.findViewById(R.id.search_edit);
@@ -270,6 +271,7 @@ import com.squareup.picasso.Picasso;
 @Override
 	public boolean onOptionsItemSelected(MenuItem item){
 	 switch(item.getItemId()){
+
 	 case R.id.settings_menu:
 		 Intent i = new Intent(getActivity(),SettingsActivity.class);
 		 startActivity(i);

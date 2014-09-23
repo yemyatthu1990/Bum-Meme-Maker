@@ -16,6 +16,7 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -231,6 +232,7 @@ public class MemeViewFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setHasOptionsMenu(true);
+    getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
     selectedImagePath = getArguments().getString(NAME_TAG);
 
 
@@ -670,6 +672,10 @@ public class MemeViewFragment extends Fragment {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
+      // Respond to the action bar's Up/Home button
+      case android.R.id.home:
+         NavUtils.navigateUpFromSameTask(getActivity());
+         return true;
       case R.id.settings_menu:
         Intent i = new Intent(getActivity(), SettingsActivity.class);
         startActivity(i);

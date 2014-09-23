@@ -24,6 +24,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		addPreferencesFromResource(R.xml.preferences);
 		

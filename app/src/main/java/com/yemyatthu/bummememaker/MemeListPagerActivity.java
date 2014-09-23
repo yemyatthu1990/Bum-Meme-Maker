@@ -21,6 +21,7 @@ public class MemeListPagerActivity extends FragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.listPager);
