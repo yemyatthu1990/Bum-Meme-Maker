@@ -257,7 +257,7 @@ public class MemeViewFragment extends Fragment {
         ((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))) {
       Picasso.with(getActivity())
           .load(getActivity().getResources().getIdentifier(selectedImagePath, "drawable", getActivity().getPackageName()))
-          .placeholder(android.R.drawable.picture_frame)
+          .placeholder(R.drawable.placeholder)
           .into(memeView);
 
 
@@ -272,7 +272,7 @@ public class MemeViewFragment extends Fragment {
         }
         Picasso.with(getActivity())
             .load(file)
-            .placeholder(android.R.drawable.picture_frame)
+            .placeholder(R.drawable.placeholder)
             .into(memeView);
 
       } else {
@@ -285,7 +285,7 @@ public class MemeViewFragment extends Fragment {
 
         Picasso.with(getActivity())
             .load(file)
-            .placeholder(android.R.drawable.picture_frame)
+            .placeholder(R.drawable.placeholder)
             .into(memeView);
       }
 
