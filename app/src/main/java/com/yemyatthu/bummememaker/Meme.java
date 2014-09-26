@@ -2,6 +2,10 @@ package com.yemyatthu.bummememaker;
 
 public class Meme {
 	private String mName;
+    public Meme(){
+
+    }
+
 	public String getName() {
 		return mName;
 	}

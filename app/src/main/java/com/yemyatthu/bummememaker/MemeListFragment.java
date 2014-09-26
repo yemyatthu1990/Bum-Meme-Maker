@@ -34,10 +34,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
- class MemeListFragment extends ListFragment{
+public class MemeListFragment extends ListFragment{
 	private EditText txtSearch;
 	private Meme mainMeme;
-     private ArrayAdapter<Meme> adapter;
+    private ArrayAdapter<Meme> adapter;
 	private ArrayList<Meme> mMemes;
 	private ArrayList<Meme> mFavoriteMemes;
 	private ArrayList<Meme> mMyanmarMemes;
@@ -173,7 +173,7 @@ import java.util.Locale;
 			if(mMemes.contains(MemeLab.get(getActivity()).getMeme(path))||mMyanmarMemes.contains(MemeLab.get(getActivity()).getMeme(path))){
 				Picasso.with(getActivity())
 				.load( getResources().getIdentifier(path , "drawable",getActivity().getPackageName()))
-				.placeholder(android.R.drawable.picture_frame)
+				.placeholder(R.drawable.placeholder_small)
 				.resize(160, 160)
 				.into(view);
 				    
@@ -189,7 +189,7 @@ import java.util.Locale;
 					}
 				 Picasso.with(getActivity())
 					.load( file)
-					.placeholder(android.R.drawable.picture_frame)
+					.placeholder(R.drawable.placeholder_small)
 					.resize(160, 160)
 					.into(view);
 			 }
@@ -294,7 +294,7 @@ import java.util.Locale;
 		String[] projection = {MediaStore.Images.Media.DATA};
 		Cursor cursor = getActivity().getContentResolver().query(uri,projection,null,null,null);
 		if(cursor.moveToFirst()){
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 		res=cursor.getString(column_index);
 		}
 		cursor.close();

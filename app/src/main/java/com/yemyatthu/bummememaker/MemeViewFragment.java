@@ -673,8 +673,8 @@ public class MemeViewFragment extends Fragment {
     switch (item.getItemId()) {
       // Respond to the action bar's Up/Home button
       case android.R.id.home:
-         NavUtils.navigateUpFromSameTask(getActivity());
-         return true;
+        NavUtils.navigateUpFromSameTask(getActivity());
+        return true;
       case R.id.settings_menu:
         Intent i = new Intent(getActivity(), SettingsActivity.class);
         startActivity(i);
@@ -700,7 +700,7 @@ public class MemeViewFragment extends Fragment {
     String[] projection = {MediaStore.Images.Media.DATA};
     Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
     if (cursor.moveToFirst()) {
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+      int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
       res = cursor.getString(column_index);
     }
     cursor.close();

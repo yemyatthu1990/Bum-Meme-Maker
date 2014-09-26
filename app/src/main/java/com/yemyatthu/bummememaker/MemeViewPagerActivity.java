@@ -77,14 +77,16 @@ public class MemeViewPagerActivity extends FragmentActivity {
 			
 		});
 		
-		String memeName = getIntent().getStringExtra(MemeViewFragment.NAME_TAG);
-		for(int i =0;i<mPagerMemes.size();i++){
-			if(mPagerMemes.get(i).getName().equals(memeName)){
-				mViewPager.setCurrentItem(i);
-				setTitle(getMemeTitle(mPagerMemes.get(i)));
-				break;
-			}
-		}
+		memeName = getIntent().getStringExtra(MemeViewFragment.NAME_TAG);
+		for(int i =0;i<mPagerMemes.size();i++) {
+            if (mPagerMemes.get(i).getName().equals(memeName)) {
+                mViewPager.setCurrentItem(i);
+                if (getMemeTitle(mPagerMemes.get(i)) != null) {
+                    setTitle(getMemeTitle(mPagerMemes.get(i)));
+                }
+                break;
+            }
+        }
 		
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			

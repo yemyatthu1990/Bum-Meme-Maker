@@ -16,11 +16,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
-           	android:name="com.yemyatthu.bummememaker.MemeListPagerActivity"
-           	android:label="@string/app_name"
+            android:name="com.yemyatthu.bummememaker.MemeListPagerActivity"
+            android:label="@string/app_name"
             android:screenOrientation="sensorPortrait">
-            
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +37,17 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.yemyatthu.bummememaker.MemeListPagerActivity" />
-        </activity>  
+        </activity>
+        <activity
+            android:name="com.yemyatthu.bummememaker.MemeViewPagerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait"
+            android:parentActivityName="com.yemyatthu.bummememaker.MemeListPagerActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.yemyatthu.bummememaker.MemeListPagerActivity" />
+        </activity>
         <activity
             android:name="com.yemyatthu.bummememaker.AboutViewActivity"
             android:label="@string/about_menu"
@@ -45,16 +56,6 @@
             android:screenOrientation="sensorPortrait">
          
           </activity>
-        <activity
-               android:name="com.yemyatthu.bummememaker.MemeViewPagerActivity"
-               android:label="@string/app_name"
-               android:screenOrientation="sensorPortrait"
-               android:parentActivityName="com.yemyatthu.bummememaker.MemeListPagerActivity" >
-           <!-- Parent activity meta-data to support 4.0 and lower -->
-           <meta-data
-               android:name="android.support.PARENT_ACTIVITY"
-               android:value="com.yemyatthu.bummememaker.MemeListPagerActivity" />
-           </activity>
     </application>
 
 </manifest>
