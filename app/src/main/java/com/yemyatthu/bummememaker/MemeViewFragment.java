@@ -258,6 +258,7 @@ public class MemeViewFragment extends Fragment {
       Picasso.with(getActivity())
           .load(getActivity().getResources().getIdentifier(selectedImagePath, "drawable", getActivity().getPackageName()))
           .placeholder(R.drawable.placeholder)
+          .skipMemoryCache()
           .into(memeView);
 
 
@@ -273,6 +274,7 @@ public class MemeViewFragment extends Fragment {
         Picasso.with(getActivity())
             .load(file)
             .placeholder(R.drawable.placeholder)
+            .skipMemoryCache()
             .into(memeView);
 
       } else {
