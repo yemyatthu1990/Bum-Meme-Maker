@@ -288,6 +288,7 @@ public class MemeViewFragment extends Fragment {
         Picasso.with(getActivity())
             .load(file)
             .placeholder(R.drawable.placeholder)
+            .skipMemoryCache()
             .into(memeView);
       }
 
