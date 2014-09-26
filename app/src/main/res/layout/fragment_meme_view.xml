@@ -14,6 +14,7 @@
 	android:freezesText="true"
 	android:maxLines="3"
 	android:layout_alignParentTop="true"
+    android:layout_toStartOf="@+id/font_plus1"
 	android:layout_toLeftOf="@+id/font_plus1"
 	android:hint="@string/hint_top_text"/>
 
@@ -21,21 +22,28 @@
     android:id="@id/font_plus1"
     android:layout_width="40dp"
     android:layout_height="40dp"
+    style = "@style/customButton"
     android:layout_marginTop ="4dp"
+    android:layout_marginEnd = "2dp"
     android:layout_marginRight = "2dp"
     android:layout_marginBottom ="4dp"
     android:layout_alignParentTop="true"
+    android:layout_toStartOf="@+id/font_minus1"
     android:layout_toLeftOf="@+id/font_minus1"
     android:text="@string/plus_sign"/>
 <Button
     android:id="@id/font_minus1"
     android:layout_width="40dp"
     android:layout_height="40dp"
+    style ="@style/customButton"
+    android:layout_marginEnd ="6dp"
+    android:layout_marginStart="2dp"
     android:layout_marginRight ="6dp"
     android:layout_marginLeft="2dp"
     android:layout_marginTop ="4dp"
     android:layout_marginBottom ="4dp"
     android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
     android:layout_alignParentRight="true"
     android:text="@string/minus_sign"/>
 
@@ -48,6 +56,7 @@
 	android:freezesText="true"
 	android:maxLines="3"
 	android:layout_below="@id/top_edit_text"
+    android:layout_toStartOf="@+id/font_plus2"
 	android:layout_toLeftOf="@+id/font_plus2"
 	android:hint="@string/hint_bottom_text"	/>
 
@@ -55,10 +64,14 @@
     android:id="@id/font_plus2"
     android:layout_width="40dp"
     android:layout_height="40dp"
+    style ="@style/customButton"
+    android:layout_marginStart ="6dp"
+    android:layout_marginEnd="2dp"
     android:layout_marginLeft ="6dp"
     android:layout_marginRight="2dp"
     android:layout_marginTop ="4dp"
     android:layout_marginBottom ="4dp"
+    android:layout_toStartOf="@+id/font_minus2"
     android:layout_toLeftOf="@+id/font_minus2"
     android:layout_below="@id/font_plus1"
     android:text="@string/plus_sign"/>
@@ -66,8 +79,12 @@
     android:id="@id/font_minus2"
     android:layout_width="40dp"
     android:layout_height="40dp"
+    style ="@style/customButton"
+    android:layout_marginEnd ="6dp"
     android:layout_marginRight ="6dp"
+    android:layout_marginStart="2dp"
     android:layout_marginLeft="2dp"
+    android:layout_alignParentEnd="true"
     android:layout_alignParentRight="true"
     android:layout_marginTop ="4dp"
     android:layout_marginBottom ="4dp"
@@ -106,9 +123,10 @@
 	    android:id="@+id/waterMarkTextView"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-
+        android:layout_alignEnd="@id/meme_view"
 	    android:layout_alignRight="@id/meme_view"
 	    android:layout_alignBottom="@id/meme_view"
+        android:layout_marginEnd = "15dp"
 	    android:layout_marginRight = "15dp"
 	    android:layout_marginBottom = "80dp"
 	    android:rotation="320"
@@ -126,8 +144,10 @@
 	    android:id="@+id/top_text"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@id/meme_view"
-	    android:layout_alignRight="@id/meme_view"
+        android:layout_alignStart="@id/meme_view"
+        android:layout_alignLeft="@id/meme_view"
+        android:layout_alignEnd="@id/meme_view"
+        android:layout_alignRight="@id/meme_view"
 	    android:layout_alignTop="@id/meme_view"
 	
 	    android:maxLines="3"
@@ -143,7 +163,9 @@
 	    android:id="@+id/bottom_text"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
+        android:layout_alignStart="@id/meme_view"
 	    android:layout_alignLeft="@id/meme_view"
+        android:layout_alignEnd="@id/meme_view"
 	    android:layout_alignRight="@id/meme_view"
 	    android:layout_alignBottom="@id/meme_view"
 	    
@@ -172,34 +194,35 @@
 		<CheckBox
 		    android:id="@+id/favorite_checkBox"
 		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		  	android:layout_centerInParent="true"
-		    android:fadingEdge="horizontal|vertical"
-		    android:padding="4dp"
+		    android:layout_height="match_parent"
+            android:padding ="2dp"
+            android:fadingEdge="horizontal|vertical"
+            android:layout_margin="4dp"
 		    android:text="@string/favorite_button"
-		    android:textAlignment="center" />
+            android:layout_centerHorizontal="true" />
 
 		<Button
 		    android:id="@+id/make_meme"
-		    style="?android:attr/buttonStyle"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
+            style ="@style/customButton"
 		    android:layout_alignParentTop="true"
+            android:layout_toStartOf = "@+id/favorite_checkBox"
 		    android:layout_toLeftOf="@+id/favorite_checkBox"
 		    android:fadingEdge="horizontal|vertical"
+            android:layout_marginRight = "10dp"
 		    android:layout_marginEnd="10dp"
-		    android:padding="4dp"
-		    android:text="@string/save_button"
-		    android:textAlignment="inherit"/>
+		    android:text="@string/save_button"/>
 		<Button
 		    android:id="@+id/add_template"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
+            style ="@style/customButton"
+            android:layout_marginLeft="10dp"
 			android:layout_marginStart="10dp"
-			android:padding="4dp"
+            android:layout_toEndOf="@+id/favorite_checkBox"
 		    android:layout_toRightOf="@+id/favorite_checkBox"
-		    android:text="@string/add_template"
-		    android:textAlignment="center" />
+		    android:text="@string/add_template"/>
 			
 	</RelativeLayout>
 	
