@@ -1,4 +1,4 @@
-package com.yemyatthu.bummememaker;
+package com.yemyatthu.bummememaker.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,14 +36,32 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
-
+import com.yemyatthu.bummememaker.R;
+import com.yemyatthu.bummememaker.activity.AboutViewActivity;
+import com.yemyatthu.bummememaker.activity.MemeViewPagerActivity;
+import com.yemyatthu.bummememaker.activity.SettingsActivity;
+import com.yemyatthu.bummememaker.utils.MemeLab;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class MemeViewFragment extends Fragment {
+  public static final int REQUEST_CODE1 = 1;
+  public static final int REQUEST_CODE2 = 2;
+  public static final int REQUEST_CODE3 = 3;
+  public static final int REQUEST_CODE4 = 4;
+  public static final int REQUEST_CODE5 = 5;
+  public static final int CUSTOM_ID = 10;
+  public static final String NAME_TAG = "com.yemyatthu.mememaker.NAME";
+  public static final String FAVORITE_RESULT = "com.yemyatthu.bummememaker.FAVORITE";
+  public static final String MEME_RESULT = "com.yemyatthu.bummememaker.MEME";
+  public static final String MEME_NAME = "com.yemyatthu.bummememaker.MEMENAME";
+  public static final String finishedMeme = "/memesimages/";
+  public static final String templateMeme = "/memestemplates/";
+  private static final String ID_TAG = "com.yemyatthu.mememaker.SAVED_STATE";
+  private static final String CONFIRM = "CONFIRM";
+  private static final int SELECT_PICTURE = 6;
   private Typeface type;
   private String path;
   private String addName;
@@ -72,22 +90,6 @@ public class MemeViewFragment extends Fragment {
   private ArrayList<String> restoredText = new ArrayList<String>();
   private String topEditText, bottomEditText, topViewText, bottomViewText = null;
   private String selectedImagePath;
-  private static final String ID_TAG = "com.yemyatthu.mememaker.SAVED_STATE";
-  private static final String CONFIRM = "CONFIRM";
-  public static final int REQUEST_CODE1 = 1;
-  public static final int REQUEST_CODE2 = 2;
-  public static final int REQUEST_CODE3 = 3;
-  public static final int REQUEST_CODE4 = 4;
-  public static final int REQUEST_CODE5 = 5;
-  public static final int CUSTOM_ID = 10;
-  public static final String NAME_TAG = "com.yemyatthu.mememaker.NAME";
-  private static final int SELECT_PICTURE = 6;
-  public static final String FAVORITE_RESULT = "com.yemyatthu.bummememaker.FAVORITE";
-  public static final String MEME_RESULT = "com.yemyatthu.bummememaker.MEME";
-  public static final String MEME_NAME = "com.yemyatthu.bummememaker.MEMENAME";
-  public static final String finishedMeme = "/memesimages/";
-  public static final String templateMeme = "/memestemplates/";
-
   private SharedPreferences prefs;
 
   public static MemeViewFragment getNewInstance(String memeName) {
@@ -98,11 +100,12 @@ public class MemeViewFragment extends Fragment {
     return memeViewFragment;
   }
 
-
   @Override
   public void onResume() {
     super.onResume();
-    type = Typeface.createFromAsset(getActivity().getAssets(), "fonts/" + prefs.getString("font", "Impact") + ".ttf"); // This takes the font name from SharedPreference
+    type = Typeface.createFromAsset(getActivity().getAssets(), "fonts/"
+        + prefs.getString("font", "Impact")
+        + ".ttf"); // This takes the font name from SharedPreference
 
     switch (Integer.parseInt(prefs.getString("fontColor", "1"))) {
       case 1:
@@ -186,8 +189,8 @@ public class MemeViewFragment extends Fragment {
       default:
         shadowColor = Color.BLACK;
     }
-    topView.setShadowLayer((float)10,0,0,shadowColor);
-    bottomView.setShadowLayer((float)10,0,0,shadowColor);
+    topView.setShadowLayer((float) 10, 0, 0, shadowColor);
+    bottomView.setShadowLayer((float) 10, 0, 0, shadowColor);
 
     if (prefs.getBoolean("capCheckBox", true)) {
       topView.setAllCaps(true);
@@ -197,34 +200,41 @@ public class MemeViewFragment extends Fragment {
     }
 
     if (prefs.getBoolean("borderBarCheckBox", false)) {
-      int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, Integer.parseInt(prefs.getString("borderSize", "60")), getResources().getDisplayMetrics());
-      int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics());
+      int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+          Integer.parseInt(prefs.getString("borderSize", "60")),
+          getResources().getDisplayMetrics());
+      int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0,
+          getResources().getDisplayMetrics());
       memeView.setPadding(width, height, width, height);
-      RelativeLayout.LayoutParams paramsTop = (RelativeLayout.LayoutParams) topView.getLayoutParams();
+      RelativeLayout.LayoutParams paramsTop =
+          (RelativeLayout.LayoutParams) topView.getLayoutParams();
       paramsTop.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
       topView.setLayoutParams(paramsTop);
-      RelativeLayout.LayoutParams paramsBottom = (RelativeLayout.LayoutParams) bottomView.getLayoutParams();
+      RelativeLayout.LayoutParams paramsBottom =
+          (RelativeLayout.LayoutParams) bottomView.getLayoutParams();
       paramsBottom.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
       bottomView.setLayoutParams(paramsBottom);
     }
     if (!prefs.getBoolean("borderBarCheckBox", false)) {
-      int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics());
+      int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0,
+          getResources().getDisplayMetrics());
       memeView.setPadding(width, width, width, width);
-      RelativeLayout.LayoutParams paramsTop = (RelativeLayout.LayoutParams) topView.getLayoutParams();
+      RelativeLayout.LayoutParams paramsTop =
+          (RelativeLayout.LayoutParams) topView.getLayoutParams();
       topView.setLayoutParams(paramsTop);
-      RelativeLayout.LayoutParams paramsBottom = (RelativeLayout.LayoutParams) bottomView.getLayoutParams();
+      RelativeLayout.LayoutParams paramsBottom =
+          (RelativeLayout.LayoutParams) bottomView.getLayoutParams();
       bottomView.setLayoutParams(paramsBottom);
     }
     if (prefs.getBoolean("waterMarkCheckBox", false)) {
       waterMark.setVisibility(View.VISIBLE);
       waterMark.setText(prefs.getString("waterMarkEditText", "BUM"));
-      waterMark.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(prefs.getString("waterMarkSize", "50")));
+      waterMark.setTextSize(TypedValue.COMPLEX_UNIT_SP,
+          Integer.parseInt(prefs.getString("waterMarkSize", "50")));
     }
     if (!prefs.getBoolean("waterMarkCheckBox", false)) {
       waterMark.setVisibility(View.INVISIBLE);
     }
-
-
   }
 
   @Override
@@ -233,7 +243,6 @@ public class MemeViewFragment extends Fragment {
     setHasOptionsMenu(true);
     getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
     selectedImagePath = getArguments().getString(NAME_TAG);
-
 
     prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     topViewSize = 25;
@@ -253,17 +262,20 @@ public class MemeViewFragment extends Fragment {
     final View v = inflater.inflate(R.layout.fragment_meme_view, root, false);
     memeView = (ImageView) v.findViewById(R.id.meme_view);
 
-    if (((MemeLab.get(getActivity())).getMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
-        ((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))) {
+    if (((MemeLab.get(getActivity())).getMemes()).contains(
+        MemeLab.get(getActivity()).getMeme(selectedImagePath)) || ((MemeLab.get(
+        getActivity())).getMyanmarMemes()).contains(
+        MemeLab.get(getActivity()).getMeme(selectedImagePath))) {
       Picasso.with(getActivity())
-          .load(getActivity().getResources().getIdentifier(selectedImagePath, "drawable", getActivity().getPackageName()))
+          .load(getActivity().getResources()
+              .getIdentifier(selectedImagePath, "drawable", getActivity().getPackageName()))
           .placeholder(R.drawable.placeholder)
           .skipMemoryCache()
           .into(memeView);
-
-
     } else {
-      if (MemeLab.get(getActivity()).getCustomMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))) {
+      if (MemeLab.get(getActivity())
+          .getCustomMemes()
+          .contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))) {
         File file = null;
         try {
           file = new File(Environment.getExternalStorageDirectory().toString() +
@@ -276,7 +288,6 @@ public class MemeViewFragment extends Fragment {
             .placeholder(R.drawable.placeholder)
             .skipMemoryCache()
             .into(memeView);
-
       } else {
         File file = null;
         try {
@@ -291,10 +302,7 @@ public class MemeViewFragment extends Fragment {
             .skipMemoryCache()
             .into(memeView);
       }
-
-
     }
-
 
     waterMark = (TextView) v.findViewById(R.id.waterMarkTextView);
 
@@ -327,8 +335,6 @@ public class MemeViewFragment extends Fragment {
       public void afterTextChanged(Editable p1) {
         // TODO: Implement this method
       }
-
-
     });
     bottomEdit = (EditText) v.findViewById(R.id.bottom_edit_text);
     bottomEdit.setText(bottomEditText);
@@ -342,34 +348,41 @@ public class MemeViewFragment extends Fragment {
       @Override
       public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
         bottomView.setText(p1);
-
       }
 
       @Override
       public void afterTextChanged(Editable p1) {
         // TODO: Implement this method
       }
-
-
     });
 
     favoriteCheckBox = (CheckBox) v.findViewById(R.id.favorite_checkBox);
-    if (!(((MemeLab.get(getActivity())).getMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
-        ((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
-        (MemeLab.get(getActivity()).getCustomMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))))) {
+    if (!(((MemeLab.get(getActivity())).getMemes()).contains(
+        MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
+        ((MemeLab.get(getActivity())).getMyanmarMemes()).contains(
+            MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
+        (MemeLab.get(getActivity())
+            .getCustomMemes()
+            .contains(MemeLab.get(getActivity()).getMeme(selectedImagePath))))) {
       favoriteCheckBox.setEnabled(false);
     }
 
-    favoriteCheckBox.setChecked(MemeLab.get(getActivity()).getFavoriteMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)));
-      favoriteCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+    favoriteCheckBox.setChecked(MemeLab.get(getActivity())
+        .getFavoriteMemes()
+        .contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)));
+    favoriteCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
       @Override
       public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         // TODO Auto-generated method stub
-        if (((MemeLab.get(getActivity())).getMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
-            ((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
-            (MemeLab.get(getActivity()).getCustomMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)))) {
+        if (((MemeLab.get(getActivity())).getMemes()).contains(
+            MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
+            ((MemeLab.get(getActivity())).getMyanmarMemes()).contains(
+                MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
+            (MemeLab.get(getActivity())
+                .getCustomMemes()
+                .contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)))) {
           if (isChecked) {
             Toast.makeText(getActivity(), "added to Favorites", Toast.LENGTH_SHORT).show();
             sendResult(FAVORITE_RESULT, true);
@@ -379,16 +392,20 @@ public class MemeViewFragment extends Fragment {
             sendResult(FAVORITE_RESULT, false);
           }
         } else {
-          Toast.makeText(getActivity(), "cannot add Custom images to Favorites", Toast.LENGTH_SHORT).show();
+          Toast.makeText(getActivity(), "cannot add Custom images to Favorites", Toast.LENGTH_SHORT)
+              .show();
         }
-
       }
     });
 
     addTemplate = (Button) v.findViewById(R.id.add_template);
-    if (((MemeLab.get(getActivity())).getMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
-        ((MemeLab.get(getActivity())).getMyanmarMemes()).contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
-        (MemeLab.get(getActivity()).getCustomMemes().contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)))) {
+    if (((MemeLab.get(getActivity())).getMemes()).contains(
+        MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
+        ((MemeLab.get(getActivity())).getMyanmarMemes()).contains(
+            MemeLab.get(getActivity()).getMeme(selectedImagePath)) ||
+        (MemeLab.get(getActivity())
+            .getCustomMemes()
+            .contains(MemeLab.get(getActivity()).getMeme(selectedImagePath)))) {
       addTemplate.setEnabled(false);
     }
     addTemplate.setOnClickListener(new OnClickListener() {
@@ -397,12 +414,11 @@ public class MemeViewFragment extends Fragment {
       public void onClick(View v) {
         // TODO Auto-generated method stub
         FragmentManager fm = getFragmentManager();
-        ConfirmDialogFragment cfDialog = ConfirmDialogFragment.getNewInstance(R.string.add_confirm, R.string.save_title);
+        ConfirmDialogFragment cfDialog =
+            ConfirmDialogFragment.getNewInstance(R.string.add_confirm, R.string.save_title);
         cfDialog.setTargetFragment(MemeViewFragment.this, REQUEST_CODE4);
         cfDialog.show(fm, CONFIRM);
-
       }
-
     });
     memeContainer = v.findViewById(R.id.memeView_container);
     makeMeme = (Button) v.findViewById(R.id.make_meme);
@@ -411,13 +427,11 @@ public class MemeViewFragment extends Fragment {
       @Override
       public void onClick(View p1) {
         FragmentManager fm = getFragmentManager();
-        ConfirmDialogFragment cfDialog = ConfirmDialogFragment.getNewInstance(R.string.save_confirm, R.string.save_title);
+        ConfirmDialogFragment cfDialog =
+            ConfirmDialogFragment.getNewInstance(R.string.save_confirm, R.string.save_title);
         cfDialog.setTargetFragment(MemeViewFragment.this, REQUEST_CODE1);
         cfDialog.show(fm, CONFIRM);
-
       }
-
-
     });
     fontPlus1 = (Button) v.findViewById(R.id.font_plus1);
     fontPlus1.setOnClickListener(new OnClickListener() {
@@ -427,7 +441,6 @@ public class MemeViewFragment extends Fragment {
         topViewSize += 1;
         topView.setTextSize(topViewSize);
       }
-
     });
 
     fontPlus2 = (Button) v.findViewById(R.id.font_plus2);
@@ -438,9 +451,7 @@ public class MemeViewFragment extends Fragment {
         bottomViewSize += 1;
 
         bottomView.setTextSize(bottomViewSize);
-
       }
-
     });
 
     fontMinus1 = (Button) v.findViewById(R.id.font_minus1);
@@ -450,9 +461,7 @@ public class MemeViewFragment extends Fragment {
       public void onClick(View v) {
         topViewSize -= 1;
         topView.setTextSize(topViewSize);
-
       }
-
     });
 
     fontMinus2 = (Button) v.findViewById(R.id.font_minus2);
@@ -464,9 +473,7 @@ public class MemeViewFragment extends Fragment {
         bottomViewSize -= 1;
         bottomView.setTextSize(bottomViewSize);
       }
-
     });
-
 
     return v;
   }
@@ -503,28 +510,25 @@ public class MemeViewFragment extends Fragment {
       }
 
       @Override
-      public void beforeTextChanged(CharSequence s, int start, int count,
-                                    int after) {
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         // TODO Auto-generated method stub
 
       }
 
       @Override
-      public void onTextChanged(CharSequence s, int start, int before,
-                                int count) {
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
         // TODO Auto-generated method stub
       }
-
     });
-
   }
-
 
   public void getName() {
     FragmentManager fm = getFragmentManager();
     View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_save_name, null);
     EditText edText = (EditText) view.findViewById(R.id.save_name_edit);
-    if (MemeLab.get(getActivity()).getMemes().contains((MemeLab.get(getActivity()).getMeme(selectedImagePath)))) {
+    if (MemeLab.get(getActivity())
+        .getMemes()
+        .contains((MemeLab.get(getActivity()).getMeme(selectedImagePath)))) {
       edText.setText(selectedImagePath);
       saveName = selectedImagePath;
     } else {
@@ -543,24 +547,19 @@ public class MemeViewFragment extends Fragment {
       }
 
       @Override
-      public void beforeTextChanged(CharSequence s, int start, int count,
-                                    int after) {
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         // TODO Auto-generated method stub
 
       }
 
       @Override
-      public void onTextChanged(CharSequence s, int start, int before,
-                                int count) {
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
         // TODO Auto-generated method stub
       }
-
     });
   }
 
-
   public File getFile(View image, String dir, String name) {
-
 
     bitmap = Bitmap.createBitmap(image.getWidth(), image.getHeight(), Bitmap.Config.ARGB_8888);
     Canvas c = new Canvas(bitmap);
@@ -570,19 +569,19 @@ public class MemeViewFragment extends Fragment {
     File newDir = new File(root + dir);
     newDir.mkdirs();
 
-
     return new File(newDir, name + ".jpg");
   }
 
   public void checkName(File file) {
     if (file.exists()) {
       FragmentManager fm = getFragmentManager();
-      ConfirmDialogFragment cfDialog = ConfirmDialogFragment.getNewInstance(R.string.name_exist, R.string.save_title);
+      ConfirmDialogFragment cfDialog =
+          ConfirmDialogFragment.getNewInstance(R.string.name_exist, R.string.save_title);
       cfDialog.setTargetFragment(MemeViewFragment.this, REQUEST_CODE2);
       cfDialog.show(fm, CONFIRM);
-    } else
+    } else {
       saveFile(file);
-
+    }
   }
 
   public void addFile(File file) {
@@ -611,8 +610,7 @@ public class MemeViewFragment extends Fragment {
       i.setDataAndType(uri, "image/*");
       startActivity(i);
       Toast.makeText(getActivity(), "Saved as " + file.getPath(), Toast.LENGTH_LONG).show();
-      MediaScannerConnection.scanFile(getActivity(),
-          new String[]{file.toString()}, null,
+      MediaScannerConnection.scanFile(getActivity(), new String[] { file.toString() }, null,
           new MediaScannerConnection.OnScanCompletedListener() {
             public void onScanCompleted(String path, Uri uri) {
             }
@@ -638,14 +636,12 @@ public class MemeViewFragment extends Fragment {
     }
     if (requestCode == REQUEST_CODE4) {
       addName();
-
     }
     if (requestCode == REQUEST_CODE5) {
 
       File file = getFile(memeView, templateMeme, addName);
       addFile(file);
       sendResult(MEME_RESULT, true);
-
     }
     if (requestCode == SELECT_PICTURE) {
 
@@ -660,7 +656,6 @@ public class MemeViewFragment extends Fragment {
       sendResult(MEME_RESULT, true);
     }
   }
-
 
   @Override
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -690,17 +685,17 @@ public class MemeViewFragment extends Fragment {
         Intent e = new Intent();
         e.setType("image/*");
         e.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(e, getActivity().getResources().getString(R.string.image_picker_title)), SELECT_PICTURE);
+        startActivityForResult(Intent.createChooser(e,
+            getActivity().getResources().getString(R.string.image_picker_title)), SELECT_PICTURE);
         return true;
       default:
         return super.onOptionsItemSelected(item);
     }
-
   }
 
   public String getPath(Uri uri) {
     String res = null;
-    String[] projection = {MediaStore.Images.Media.DATA};
+    String[] projection = { MediaStore.Images.Media.DATA };
     Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
     if (cursor.moveToFirst()) {
       int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -708,9 +703,7 @@ public class MemeViewFragment extends Fragment {
     }
     cursor.close();
     return res;
-
   }
-
 
   public void sendResult(String tag, boolean result) {
     Intent i = new Intent();
@@ -721,6 +714,4 @@ public class MemeViewFragment extends Fragment {
     }
     getActivity().setResult(Activity.RESULT_OK, i);
   }
-
-
 }

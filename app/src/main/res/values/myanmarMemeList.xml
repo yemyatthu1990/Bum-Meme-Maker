@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-      <string-array name="myanmar_meme_list">
+  <string-array name="myanmar_meme_list">
 
-<item>almost_politically_correct_nay_myo_wai</item>          
+    <item>almost_politically_correct_nay_myo_wai</item>
 <item>bad_advice_theinsein
 </item>
 <item>bullet_hla_swe
 </item>
 <item>burmese_badass_grandpa
 </item>
-<item>burmese_skeptical_third_world_kid</item>
+    <item>burmese_skeptical_third_world_kid</item>
 
 
 
@@ -17,7 +17,7 @@
 </item>
 <item>good_guy_than_shwe
 </item>
-<item >masterfully_wrong_thinker_hla_swe</item>
+    <item>masterfully_wrong_thinker_hla_swe</item>
 <item>misunderstood_wirathu
 </item>
 
@@ -33,5 +33,5 @@
 <item>scumbag_mpt
 </item>
 
-	</string-array>
+  </string-array>
 </resources>

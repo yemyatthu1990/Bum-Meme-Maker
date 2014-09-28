@@ -1,231 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-<EditText
-	android:id="@+id/top_edit_text"
-	android:layout_margin="6dp"
-	android:layout_height="wrap_content"
-	android:layout_width="match_parent"
-	android:singleLine="true"
-	android:freezesText="true"
-	android:maxLines="3"
-	android:layout_alignParentTop="true"
-    android:layout_toStartOf="@+id/font_plus1"
-	android:layout_toLeftOf="@+id/font_plus1"
-	android:hint="@string/hint_top_text"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
 
-<Button
-    android:id="@id/font_plus1"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
-    style = "@style/customButton"
-    android:layout_marginTop ="4dp"
-    android:layout_marginEnd = "2dp"
-    android:layout_marginRight = "2dp"
-    android:layout_marginBottom ="4dp"
+  <EditText
+    android:id="@+id/top_edit_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
-    android:layout_toStartOf="@+id/font_minus1"
-    android:layout_toLeftOf="@+id/font_minus1"
-    android:text="@string/plus_sign"/>
-<Button
-    android:id="@id/font_minus1"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
-    style ="@style/customButton"
-    android:layout_marginEnd ="6dp"
-    android:layout_marginStart="2dp"
-    android:layout_marginRight ="6dp"
-    android:layout_marginLeft="2dp"
-    android:layout_marginTop ="4dp"
-    android:layout_marginBottom ="4dp"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentRight="true"
-    android:text="@string/minus_sign"/>
-
-<EditText
     android:layout_margin="6dp"
-	android:id="@+id/bottom_edit_text"
-	android:layout_height="wrap_content"
-	android:layout_width="match_parent"
-	android:singleLine="true"
-	android:freezesText="true"
-	android:maxLines="3"
-	android:layout_below="@id/top_edit_text"
-    android:layout_toStartOf="@+id/font_plus2"
-	android:layout_toLeftOf="@+id/font_plus2"
-	android:hint="@string/hint_bottom_text"	/>
+    android:layout_toLeftOf="@+id/font_plus1"
+    android:layout_toStartOf="@+id/font_plus1"
+    android:freezesText="true"
+    android:hint="@string/hint_top_text"
+    android:maxLines="3"
+    android:singleLine="true" />
 
-<Button
-    android:id="@id/font_plus2"
+  <Button
+    android:id="@id/font_plus1"
+    style="@style/customButton"
     android:layout_width="40dp"
     android:layout_height="40dp"
-    style ="@style/customButton"
-    android:layout_marginStart ="6dp"
+    android:layout_alignParentTop="true"
+    android:layout_marginBottom="4dp"
     android:layout_marginEnd="2dp"
-    android:layout_marginLeft ="6dp"
     android:layout_marginRight="2dp"
-    android:layout_marginTop ="4dp"
-    android:layout_marginBottom ="4dp"
-    android:layout_toStartOf="@+id/font_minus2"
-    android:layout_toLeftOf="@+id/font_minus2"
-    android:layout_below="@id/font_plus1"
-    android:text="@string/plus_sign"/>
-<Button
-    android:id="@id/font_minus2"
+    android:layout_marginTop="4dp"
+    android:layout_toLeftOf="@+id/font_minus1"
+    android:layout_toStartOf="@+id/font_minus1"
+    android:text="@string/plus_sign" />
+
+  <Button
+    android:id="@id/font_minus1"
+    style="@style/customButton"
     android:layout_width="40dp"
     android:layout_height="40dp"
-    style ="@style/customButton"
-    android:layout_marginEnd ="6dp"
-    android:layout_marginRight ="6dp"
-    android:layout_marginStart="2dp"
-    android:layout_marginLeft="2dp"
     android:layout_alignParentEnd="true"
     android:layout_alignParentRight="true"
-    android:layout_marginTop ="4dp"
-    android:layout_marginBottom ="4dp"
-    android:layout_below = "@id/font_minus1"
-    android:text="@string/minus_sign"/>
+    android:layout_alignParentTop="true"
+    android:layout_marginBottom="4dp"
+    android:layout_marginEnd="6dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginTop="4dp"
+    android:text="@string/minus_sign" />
 
-<RelativeLayout
-    android:id = "@+id/meme_Box"
-    android:layout_below="@id/bottom_edit_text"
+  <EditText
+    android:id="@+id/bottom_edit_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/top_edit_text"
+    android:layout_margin="6dp"
+    android:layout_toLeftOf="@+id/font_plus2"
+    android:layout_toStartOf="@+id/font_plus2"
+    android:freezesText="true"
+    android:hint="@string/hint_bottom_text"
+    android:maxLines="3"
+    android:singleLine="true" />
+
+  <Button
+    android:id="@id/font_plus2"
+    style="@style/customButton"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:layout_below="@id/font_plus1"
+    android:layout_marginBottom="4dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginStart="6dp"
+    android:layout_marginTop="4dp"
+    android:layout_toLeftOf="@+id/font_minus2"
+    android:layout_toStartOf="@+id/font_minus2"
+    android:text="@string/plus_sign" />
+
+  <Button
+    android:id="@id/font_minus2"
+    style="@style/customButton"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/font_minus1"
+    android:layout_marginBottom="4dp"
+    android:layout_marginEnd="6dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginTop="4dp"
+    android:text="@string/minus_sign" />
+
+  <RelativeLayout
+    android:id="@+id/meme_Box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_above="@+id/linear_field"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_centerInParent="true"
-	android:gravity="center">
-	
-	<RelativeLayout 
-	    android:id="@+id/memeView_container"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:background="#000000"
-	    android:layout_centerInParent="true"
-	    android:gravity="center"
-	    >
-	 
+    android:layout_below="@id/bottom_edit_text"
+    android:layout_centerInParent="true"
+    android:gravity="center">
 
-	<ImageView
-	    android:id="@+id/meme_view"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:contentDescription="@string/meme_view"
-		android:layout_centerInParent="true"
-	    android:adjustViewBounds="true"
-	    android:scaleType="fitXY"/>
-	
-	<TextView
-	    android:id="@+id/waterMarkTextView"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/meme_view"
-	    android:layout_alignRight="@id/meme_view"
-	    android:layout_alignBottom="@id/meme_view"
-        android:layout_marginEnd = "15dp"
-	    android:layout_marginRight = "15dp"
-	    android:layout_marginBottom = "80dp"
-	    android:rotation="320"
-	    android:textColor="@android:color/white"
-	    android:shadowColor="#000000"
-	    android:shadowDx="3"
-	    android:shadowDy="3"
-	    android:shadowRadius="5"	    
-	    android:alpha="0.3"
-	    android:textStyle="bold"
-	    android:typeface="serif"
-	    />    
-	
-	<TextView
-	    android:id="@+id/top_text"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-        android:layout_alignStart="@id/meme_view"
-        android:layout_alignLeft="@id/meme_view"
+    <RelativeLayout
+      android:id="@+id/memeView_container"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:background="#000000"
+      android:gravity="center">
+
+
+      <ImageView
+        android:id="@+id/meme_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/meme_view"
+        android:scaleType="fitXY" />
+
+      <TextView
+        android:id="@+id/waterMarkTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/meme_view"
         android:layout_alignEnd="@id/meme_view"
         android:layout_alignRight="@id/meme_view"
-	    android:layout_alignTop="@id/meme_view"
-	
-	    android:maxLines="3"
-	    android:padding = "6sp"
-	    android:textStyle="bold"
-	    android:textAllCaps="true"
-	    android:gravity="center_horizontal"
-	    android:layout_centerHorizontal="true"
-	    android:textColor="#FFFFFF" />
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:alpha="0.3"
+        android:rotation="320"
+        android:shadowColor="#000000"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="5"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:typeface="serif" />
 
-
-	<TextView
-	    android:id="@+id/bottom_text"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-        android:layout_alignStart="@id/meme_view"
-	    android:layout_alignLeft="@id/meme_view"
+      <TextView
+        android:id="@+id/top_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignEnd="@id/meme_view"
-	    android:layout_alignRight="@id/meme_view"
-	    android:layout_alignBottom="@id/meme_view"
-	    
-	    android:maxLines="3"
-	    android:padding="6sp"
-	    android:textAllCaps="true"
-	    android:textStyle="bold"	    
-	    android:gravity="center_horizontal"
-	    android:layout_centerHorizontal="true"
-	    android:textColor="#FFFFFF"/>
+        android:layout_alignLeft="@id/meme_view"
+        android:layout_alignRight="@id/meme_view"
+        android:layout_alignStart="@id/meme_view"
+        android:layout_alignTop="@id/meme_view"
 
-	</RelativeLayout>
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:maxLines="3"
+        android:padding="6sp"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
 
+      <TextView
+        android:id="@+id/bottom_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/meme_view"
+        android:layout_alignEnd="@id/meme_view"
+        android:layout_alignLeft="@id/meme_view"
+        android:layout_alignRight="@id/meme_view"
+        android:layout_alignStart="@id/meme_view"
 
-</RelativeLayout>
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:maxLines="3"
+        android:padding="6sp"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
-	
-	
-	<RelativeLayout
-		android:id="@+id/linear_field"
-		android:layout_height = "60sp"
-		android:layout_width = "match_parent"
-		android:layout_alignParentBottom="true">
+    </RelativeLayout>
 
-		<CheckBox
-		    android:id="@+id/favorite_checkBox"
-		    android:layout_width="wrap_content"
-		    android:layout_height="match_parent"
-            android:padding ="2dp"
-            android:fadingEdge="horizontal|vertical"
-            android:layout_margin="4dp"
-		    android:text="@string/favorite_button"
-            android:layout_centerHorizontal="true" />
 
-		<Button
-		    android:id="@+id/make_meme"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-            style ="@style/customButton"
-		    android:layout_alignParentTop="true"
-            android:layout_toStartOf = "@+id/favorite_checkBox"
-		    android:layout_toLeftOf="@+id/favorite_checkBox"
-		    android:fadingEdge="horizontal|vertical"
-            android:layout_marginRight = "10dp"
-		    android:layout_marginEnd="10dp"
-		    android:text="@string/save_button"/>
-		<Button
-		    android:id="@+id/add_template"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-            style ="@style/customButton"
-            android:layout_marginLeft="10dp"
-			android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/favorite_checkBox"
-		    android:layout_toRightOf="@+id/favorite_checkBox"
-		    android:text="@string/add_template"/>
-			
-	</RelativeLayout>
-	
+  </RelativeLayout>
+
+
+  <RelativeLayout
+    android:id="@+id/linear_field"
+    android:layout_width="match_parent"
+    android:layout_height="60sp"
+    android:layout_alignParentBottom="true">
+
+    <CheckBox
+      android:id="@+id/favorite_checkBox"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_centerHorizontal="true"
+      android:layout_margin="4dp"
+      android:fadingEdge="horizontal|vertical"
+      android:padding="2dp"
+      android:text="@string/favorite_button" />
+
+    <Button
+      android:id="@+id/make_meme"
+      style="@style/customButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_marginEnd="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_toLeftOf="@+id/favorite_checkBox"
+      android:layout_toStartOf="@+id/favorite_checkBox"
+      android:fadingEdge="horizontal|vertical"
+      android:text="@string/save_button" />
+
+    <Button
+      android:id="@+id/add_template"
+      style="@style/customButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:layout_toEndOf="@+id/favorite_checkBox"
+      android:layout_toRightOf="@+id/favorite_checkBox"
+      android:text="@string/add_template" />
+
+  </RelativeLayout>
+
 
 </RelativeLayout>
 

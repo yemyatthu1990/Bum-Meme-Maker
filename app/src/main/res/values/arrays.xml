@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="FontList">
-        <item>Impact</item>
-        <item>ComicSansMS</item>
-        <item>Zawgyi</item>
-    </string-array>
-    <string-array name="colorListArray">
-        <item>White</item>
-        <item>Black</item>
-        <item>Red</item>
-        <item>Gray</item>
-        <item>Green</item>
-        <item>Yellow</item>
-        <item>Blue</item>
-        
-    </string-array>
-    <string-array name="colorListValue">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-    </string-array>
-    
-    <string-array name="sizeListArray">
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
-    </string-array>
-    
-    <string-array name="borderSizeListValue">
-        <item>40</item>
-        <item>60</item>
-        <item>80</item>
-    </string-array>
-      <string-array name="waterMarkSizeListValue">
-        <item>30</item>
-        <item>50</item>
-        <item>70</item>
-    </string-array>
+  <string-array name="FontList">
+    <item>Impact</item>
+    <item>ComicSansMS</item>
+    <item>Zawgyi</item>
+  </string-array>
+  <string-array name="colorListArray">
+    <item>White</item>
+    <item>Black</item>
+    <item>Red</item>
+    <item>Gray</item>
+    <item>Green</item>
+    <item>Yellow</item>
+    <item>Blue</item>
+
+  </string-array>
+  <string-array name="colorListValue">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+  </string-array>
+
+  <string-array name="sizeListArray">
+    <item>Small</item>
+    <item>Medium</item>
+    <item>Large</item>
+  </string-array>
+
+  <string-array name="borderSizeListValue">
+    <item>40</item>
+    <item>60</item>
+    <item>80</item>
+  </string-array>
+  <string-array name="waterMarkSizeListValue">
+    <item>30</item>
+    <item>50</item>
+    <item>70</item>
+  </string-array>
 </resources>

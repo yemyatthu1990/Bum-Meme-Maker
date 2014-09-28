@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <resources>
-        <item type = "id" name = "listPager">
-            </item>
-        <item type = "id" name= "viewPager"/>
-    </resources>
+<resources>
+  <item name="listPager" type="id"></item>
+  <item name="viewPager" type="id" />
+</resources>

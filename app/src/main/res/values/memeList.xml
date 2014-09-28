@@ -1,110 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string-array name="meme_list">
-
-        <item>            advice_dog</item>
-        <item>            advice_god</item>
-        <item>            advice_yoda</item>
-		<item >american_tourist
-</item>
-        <item>            ancient_aliens</item>
-        <item>            annoying_childhood_friend</item>
-        <item>            annoying_facebook_girl</item>
-        <item>            anti_joke_chicken</item>
-        <item>            art_student_owl</item>
-        <item>            baby_godfather</item>
-        <item>            bad_advice_cat</item>
-		
-        <item>            bad_joke_eel</item>
-        <item>            bad_luck_brian</item>
-        <item>            bear_grylls</item>
-        <item>            blank_colored_background</item>
-        <item>            brace_yourselves</item>
-        <item>            business_cat
-</item>
-
- 
-        <item>            butthurt_dweller</item>
-        <item>chemistry_cat</item>
-        <item>college_freshman</item>
-        <item>computer_guy</item>
-        <item>confession_bear</item>
-        <item>conspiracy_keanu</item>
-        <item>courage_wolf</item>
-        <item>crazy_girlfriend_praying_mantis</item>
-        <item>creepy_condescending_wonka</item>
-        <item>depression_dog</item>
-        <item>downvoting_roman</item>
-        <item>drunk_baby</item>
-        <item>dwight_schrute</item>
-        <item>ermahgerd_berks</item>
-        <item>evil_cows</item>
-        <item>family_tech_support_guy</item>
-        <item>first_world_problems</item>
-        <item>first_world_problems_cat</item>
-        <item>fk_yeah</item>
-        <item>forever_alone</item>
-        <item>foul_bachelorette_frog</item>
-        <item>foul_bachelor_frog</item>
-        <item>futurama_fry</item>
-        <item>futurama_zoidberg</item>
-        <item>gasp_rage_face</item>
-        <item>good_guy_greg</item>
-        <item>grandma_finds_the_internet</item>
-        <item>hawkward</item>
-        <item>helpful_tyler_durden</item>
-        <item>high_expectations_asian_father</item>
-        <item>hipster_barista</item>
-        <item>hipster_kitty</item>
-        <item>idiot_nerd_girl</item>
-        <item>ill_just_wait_here</item>
-        <item>insanity_wolf</item>
-        <item>i_have_no_idea_what_i_am_doing</item>
-        <item>joseph_ducreux</item>
-        <item>karate_kyle</item>
-        <item>lame_pun_coon</item>
-        <item>lazy_college_senior</item>
-        <item>lol_guy</item>
-        <item>matrix_morpheus</item>
-        <item>men_laughing</item>
-        <item>musically_oblivious_eight_grader</item>
-        <item>neil_degrasse_tyson</item>
-		 <item>no_bullshit_business_baby
-</item>
-
-        <item>oh_no</item>
-        <item>one_does_not_simply</item>
-        <item>ordinary_muslim_man</item>
-        <item>original_i_lied</item>
-        <item>overly_attached_girlfriend</item>
-        <item>paranoid_parrot</item>
-        <item>patriotic_eagle</item>
-        <item>pedobear</item>
-        <item>philosoraptor</item>
-        <item>pickup_line_panda</item>
-        <item>priority_peter</item>
-        <item>ptsd_clarinet_boy</item>
-        <item>put_it_somewhere_else_patrick</item>
-        <item>question_rage_face</item>
-        <item>rasta_science_teacher</item>
-        <item>redditors_wife</item>
-        <item>redneck_randal</item>
-        <item>rich_raven</item>
-        <item>sad_x_all_the_y</item>
-        <item>say_that_again_i_dare_you</item>
-        <item>scumbag_brain</item>
-        <item>scumbag_girl</item>
-        <item>scumbag_minecraft</item>
-        <item>scumbag_redditor</item>
-        <item>scumbag_steve</item>
-        <item>sexually_oblivious_rhino</item>
-        <item>sheltering_suburban_mom</item>
-        <item>shut_up_and_take_my_money_fry</item>
-        <item>skeptical_baby</item>
-<item>slowpoke
-</item><item>socially_awesome_awkward_penguin</item><item>socially_awesome_penguin</item><item>socially_awkward_penguin</item><item>stoner_dog</item><item>successful_black_man</item><item>success_kid</item><item>sudden_clarity_clarence</item><item>surprised_coala</item><item>tech_impaired_duck
-</item><item>ten_guy</item><item>the_most_interesting_cat_in_the_world</item><item>the_most_interesting_man_in_the_world</item><item>third_world_skeptical_kid</item><item>third_world_success_kid</item><item>too_damn_high</item><item>troll_face_colored</item><item>true_story</item><item>unhelpful_high_school_teacher</item><item>vengeance_dad</item><item>we_will_rebuild</item><item>x_all_the_y</item><item>yao_ming</item><item>    yo_dawg_heard_you</item><item>    y_u_no </item>
-    </string-array>
-
-</resources>
+<?xml version="1.0" encoding="utf-8"?><resources>  <string-array name="meme_list">        <item>            advice_dog</item>        <item>            advice_god</item>        <item>            advice_yoda</item>		<item>american_tourist</item>        <item>            ancient_aliens</item>        <item>            annoying_childhood_friend</item>        <item>            annoying_facebook_girl</item>        <item>            anti_joke_chicken</item>        <item>            art_student_owl</item>        <item>            baby_godfather</item>        <item>            bad_advice_cat</item>		        <item>            bad_joke_eel</item>        <item>            bad_luck_brian</item>        <item>            bear_grylls</item>        <item>            blank_colored_background</item>        <item>            brace_yourselves</item>        <item>            business_cat</item>         <item>            butthurt_dweller</item>        <item>chemistry_cat</item>        <item>college_freshman</item>        <item>computer_guy</item>        <item>confession_bear</item>        <item>conspiracy_keanu</item>        <item>courage_wolf</item>        <item>crazy_girlfriend_praying_mantis</item>        <item>creepy_condescending_wonka</item>        <item>depression_dog</item>        <item>downvoting_roman</item>        <item>drunk_baby</item>        <item>dwight_schrute</item>        <item>ermahgerd_berks</item>        <item>evil_cows</item>        <item>family_tech_support_guy</item>        <item>first_world_problems</item>        <item>first_world_problems_cat</item>        <item>fk_yeah</item>        <item>forever_alone</item>        <item>foul_bachelorette_frog</item>        <item>foul_bachelor_frog</item>        <item>futurama_fry</item>        <item>futurama_zoidberg</item>        <item>gasp_rage_face</item>        <item>good_guy_greg</item>        <item>grandma_finds_the_internet</item>        <item>hawkward</item>        <item>helpful_tyler_durden</item>        <item>high_expectations_asian_father</item>        <item>hipster_barista</item>        <item>hipster_kitty</item>        <item>idiot_nerd_girl</item>        <item>ill_just_wait_here</item>        <item>insanity_wolf</item>        <item>i_have_no_idea_what_i_am_doing</item>        <item>joseph_ducreux</item>        <item>karate_kyle</item>        <item>lame_pun_coon</item>        <item>lazy_college_senior</item>        <item>lol_guy</item>        <item>matrix_morpheus</item>        <item>men_laughing</item>        <item>musically_oblivious_eight_grader</item>        <item>neil_degrasse_tyson</item>		 <item>no_bullshit_business_baby</item>        <item>oh_no</item>        <item>one_does_not_simply</item>        <item>ordinary_muslim_man</item>        <item>original_i_lied</item>        <item>overly_attached_girlfriend</item>        <item>paranoid_parrot</item>        <item>patriotic_eagle</item>        <item>pedobear</item>        <item>philosoraptor</item>        <item>pickup_line_panda</item>        <item>priority_peter</item>        <item>ptsd_clarinet_boy</item>        <item>put_it_somewhere_else_patrick</item>        <item>question_rage_face</item>        <item>rasta_science_teacher</item>        <item>redditors_wife</item>        <item>redneck_randal</item>        <item>rich_raven</item>        <item>sad_x_all_the_y</item>        <item>say_that_again_i_dare_you</item>        <item>scumbag_brain</item>        <item>scumbag_girl</item>        <item>scumbag_minecraft</item>        <item>scumbag_redditor</item>        <item>scumbag_steve</item>        <item>sexually_oblivious_rhino</item>        <item>sheltering_suburban_mom</item>        <item>shut_up_and_take_my_money_fry</item>        <item>skeptical_baby</item><item>slowpoke</item><item>socially_awesome_awkward_penguin</item><item>socially_awesome_penguin</item><item>socially_awkward_penguin</item><item>stoner_dog</item><item>successful_black_man</item><item>success_kid</item><item>sudden_clarity_clarence</item><item>surprised_coala</item><item>tech_impaired_duck</item><item>ten_guy</item><item>the_most_interesting_cat_in_the_world</item><item>the_most_interesting_man_in_the_world</item><item>third_world_skeptical_kid</item><item>third_world_success_kid</item><item>too_damn_high</item><item>troll_face_colored</item><item>true_story</item><item>unhelpful_high_school_teacher</item><item>vengeance_dad</item><item>we_will_rebuild</item><item>x_all_the_y</item><item>yao_ming</item><item>    yo_dawg_heard_you</item><item>    y_u_no </item>  </string-array></resources>
