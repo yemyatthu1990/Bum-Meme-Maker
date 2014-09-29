@@ -1,4 +1,4 @@
-package com.yemyatthu.bummememaker.fragment;
+package com.yemyatthu.bumc.fragment;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -8,7 +8,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import com.yemyatthu.bummememaker.R;
+import com.yemyatthu.bumc.R;
 
 public class SettingsFragment extends PreferenceFragment
     implements OnSharedPreferenceChangeListener {

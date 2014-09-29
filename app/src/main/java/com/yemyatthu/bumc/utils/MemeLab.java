@@ -1,8 +1,8 @@
-package com.yemyatthu.bummememaker.utils;
+package com.yemyatthu.bumc.utils;
 
 import android.content.Context;
-import com.yemyatthu.bummememaker.R;
-import com.yemyatthu.bummememaker.model.Meme;
+import com.yemyatthu.bumc.R;
+import com.yemyatthu.bumc.model.Meme;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

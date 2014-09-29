@@ -1,4 +1,4 @@
-package com.yemyatthu.bummememaker.fragment;
+package com.yemyatthu.bumc.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,11 +37,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.squareup.picasso.Picasso;
-import com.yemyatthu.bummememaker.R;
-import com.yemyatthu.bummememaker.activity.AboutViewActivity;
-import com.yemyatthu.bummememaker.activity.MemeViewPagerActivity;
-import com.yemyatthu.bummememaker.activity.SettingsActivity;
-import com.yemyatthu.bummememaker.utils.MemeLab;
+import com.yemyatthu.bumc.R;
+import com.yemyatthu.bumc.activity.AboutViewActivity;
+import com.yemyatthu.bumc.activity.MemeViewPagerActivity;
+import com.yemyatthu.bumc.activity.SettingsActivity;
+import com.yemyatthu.bumc.utils.MemeLab;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;

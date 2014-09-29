@@ -1,4 +1,4 @@
-package com.yemyatthu.bummememaker.activity;
+package com.yemyatthu.bumc.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import com.yemyatthu.bummememaker.R;
-import com.yemyatthu.bummememaker.fragment.MemeViewFragment;
-import com.yemyatthu.bummememaker.model.Meme;
-import com.yemyatthu.bummememaker.utils.MemeLab;
+import com.yemyatthu.bumc.R;
+import com.yemyatthu.bumc.fragment.MemeViewFragment;
+import com.yemyatthu.bumc.model.Meme;
+import com.yemyatthu.bumc.utils.MemeLab;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;

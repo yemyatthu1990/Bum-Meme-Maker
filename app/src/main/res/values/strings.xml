@@ -2,7 +2,7 @@
 <resources>
 
   <string name="meme_view">Main View for Meme</string>
-  <string name="app_name">BUMMemeMaker</string>
+  <string name="app_name">BUMC</string>
   <string name="save_confirm">Do you want to save this meme?</string>
   <string name="ok_button">OK</string>
   <string name="cancel_button">Cancel</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-  package="com.yemyatthu.bummememaker"
+  package="com.yemyatthu.bumc"
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:versionCode="6"
   android:versionName="1.2">
@@ -18,7 +18,7 @@
     android:theme="@style/BUMTheme">
 
     <activity
-      android:name=".activity.MemeListPagerActivity"
+      android:name="com.yemyatthu.bumc.activity.MemeListPagerActivity"
       android:label="@string/app_name"
       android:screenOrientation="sensorPortrait">
 
@@ -29,9 +29,9 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".activity.SettingsActivity"
+      android:name="com.yemyatthu.bumc.activity.SettingsActivity"
       android:label="@string/settings_menu"
-      android:parentActivityName=".activity.MemeListPagerActivity"
+      android:parentActivityName="com.yemyatthu.bumc.activity.MemeListPagerActivity"
       android:screenOrientation="sensorPortrait">
       <!-- Parent activity meta-data to support 4.0 and lower -->
       <meta-data
@@ -39,9 +39,9 @@
         android:value="com.yemyatthu.bummememaker.MemeListPagerActivity" />
     </activity>
     <activity
-      android:name=".activity.MemeViewPagerActivity"
+      android:name="com.yemyatthu.bumc.activity.MemeViewPagerActivity"
       android:label="@string/app_name"
-      android:parentActivityName=".activity.MemeListPagerActivity"
+      android:parentActivityName="com.yemyatthu.bumc.activity.MemeListPagerActivity"
       android:screenOrientation="sensorPortrait">
       <!-- Parent activity meta-data to support 4.0 and lower -->
       <meta-data
@@ -49,7 +49,7 @@
         android:value="com.yemyatthu.bummememaker.MemeListPagerActivity" />
     </activity>
     <activity
-      android:name=".activity.AboutViewActivity"
+      android:name="com.yemyatthu.bumc.activity.AboutViewActivity"
       android:excludeFromRecents="true"
       android:label="@string/about_menu"
       android:screenOrientation="sensorPortrait"

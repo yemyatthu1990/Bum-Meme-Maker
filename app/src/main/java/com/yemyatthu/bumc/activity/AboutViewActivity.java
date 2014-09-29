@@ -1,9 +1,9 @@
-package com.yemyatthu.bummememaker.activity;
+package com.yemyatthu.bumc.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import com.yemyatthu.bummememaker.R;
-import com.yemyatthu.bummememaker.fragment.AboutViewFragment;
+import com.yemyatthu.bumc.R;
+import com.yemyatthu.bumc.fragment.AboutViewFragment;
 
 public class AboutViewActivity extends Activity {
   @Override

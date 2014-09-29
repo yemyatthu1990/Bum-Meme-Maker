@@ -1,4 +1,4 @@
-package com.yemyatthu.bummememaker.activity;
+package com.yemyatthu.bumc.activity;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -10,8 +10,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import com.yemyatthu.bummememaker.R;
-import com.yemyatthu.bummememaker.fragment.MemeListFragment;
+import com.yemyatthu.bumc.R;
+import com.yemyatthu.bumc.fragment.MemeListFragment;
 
 public class MemeListPagerActivity extends FragmentActivity {
 

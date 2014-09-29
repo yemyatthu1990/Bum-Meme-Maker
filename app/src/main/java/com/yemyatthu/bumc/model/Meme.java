@@ -1,4 +1,4 @@
-package com.yemyatthu.bummememaker.model;
+package com.yemyatthu.bumc.model;
 
 public class Meme {
   private String mName;

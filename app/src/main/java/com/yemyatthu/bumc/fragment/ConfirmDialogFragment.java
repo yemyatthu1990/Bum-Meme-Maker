@@ -1,4 +1,4 @@
-package com.yemyatthu.bummememaker.fragment;
+package com.yemyatthu.bumc.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import com.yemyatthu.bummememaker.R;
+import com.yemyatthu.bumc.R;
 
 public class ConfirmDialogFragment extends DialogFragment {
   public static final String TITLE_TAG = "com.yemyatthu.bummememaker.TITLE";
