@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- the theme applied to the application or activity -->
+  <style name="BUMTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+    <item name="android:actionBarStyle">@style/ActionBar.Solid.BUM</item>
+    <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Solid.BUM</item>
+  </style>
+</resources>

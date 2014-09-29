@@ -6,5 +6,4 @@
   <item android:drawable="@drawable/button_pressed" android:state_enabled="true" android:state_pressed="true" />
   <item android:drawable="@drawable/button_enabled" android:state_enabled="true" />
 
-
 </selector>
