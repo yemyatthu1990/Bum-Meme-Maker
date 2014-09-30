@@ -19,4 +19,10 @@
       parent="@android:style/Widget.Holo.Light.ActionBar.TabView.Inverse">
     <item name="android:background">@drawable/action_bar_tab_indicator</item>
   </style>
+
+  <!-- ActionBar Popup Menu Style -->
+  <style name="ActionBarPopupMenuStyle.BUM"
+      parent = "android:Widget.Holo.Light.ListPopupWindow">
+    <item name="android:popupBackground">@drawable/menu_dropdown_panel_holo_light</item>
+  </style>
 </resources>
