@@ -1,89 +1,71 @@
 package com.yemyatthu.bumc.activity;
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.FragmentTransaction;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import com.yemyatthu.bumc.R;
 import com.yemyatthu.bumc.fragment.MemeListFragment;
+import com.yemyatthu.bumc.widget.SlidingTabLayout;
 
 public class MemeListPagerActivity extends FragmentActivity {
-
-  private ViewPager mViewPager;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-    mViewPager = new ViewPager(this);
-    mViewPager.setId(R.id.listPager);
-    mViewPager.setOffscreenPageLimit(3);
-    setContentView(mViewPager);
+    setContentView(R.layout.acitivty_memelist);
 
-    final ActionBar actionBar = getActionBar();
-    if (actionBar == null) {
-      throw new AssertionError();
+    ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+    SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+    slidingTabLayout.setSelectedIndicatorColors(Color.WHITE);
+    // FIXME it's causing some problem :S
+    slidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
+
+    mViewPager.setAdapter(
+        new SlidingTabAdapter(getSupportFragmentManager(), MemeListPagerActivity.this));
+    slidingTabLayout.setViewPager(mViewPager);
+  }
+
+  public class SlidingTabAdapter extends FragmentPagerAdapter {
+
+    Context mContext;
+
+    public SlidingTabAdapter(FragmentManager fm, Context context) {
+      super(fm);
+      this.mContext = context;
     }
-    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 
-      @Override
-      public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
+    @Override public int getCount() {
+      return 4;
+    }
 
+    @Override public Fragment getItem(int position) {
+      return MemeListFragment.getNewInstance(position);
+    }
+
+    @Override public CharSequence getPageTitle(int position) {
+      switch (position) {
+        case 0:
+          return mContext.getString(R.string.meme_list_title);
+        case 1:
+          return mContext.getString(R.string.myanmar_meme_title);
+        case 2:
+          return mContext.getString(R.string.favorite_meme_title);
+        case 3:
+          return mContext.getString(R.string.custom_meme_title);
       }
+      return null;
+    }
 
-      @Override
-      public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        mViewPager.setCurrentItem(tab.getPosition());
-      }
-
-      @Override
-      public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-
-      }
-    };
-
-    actionBar.addTab(
-        actionBar.newTab().setText(R.string.meme_list_title).setTabListener(tabListener));
-    actionBar.addTab(
-        actionBar.newTab().setText(R.string.myanmar_meme_title).setTabListener(tabListener));
-    actionBar.addTab(
-        actionBar.newTab().setText(R.string.favorite_meme_title).setTabListener(tabListener));
-    actionBar.addTab(
-        actionBar.newTab().setText(R.string.custom_meme_title).setTabListener(tabListener));
-
-    FragmentManager fm = getSupportFragmentManager();
-    mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
-
-      @Override
-      public Fragment getItem(int position) {
-        // TODO Auto-generated method stub
-        return MemeListFragment.getNewInstance(position);
-      }
-
-      @Override
-      public int getCount() {
-        // TODO Auto-generated method stub
-        return 4;
-      }
-    });
-    mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
-      public void onPageSelected(int position) {
-        // When swiping between pages, select the
-        // corresponding tab.
-        getActionBar().setSelectedNavigationItem(position);
-      }
-    });
+    @Override public long getItemId(int position) {
+      return super.getItemId(position);
+    }
   }
 }
