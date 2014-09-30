@@ -20,7 +20,7 @@
 
   <item
     android:id="@+id/open_image"
-    android:icon="@drawable/ic_menu_add"
+    android:icon="@drawable/ic_action_new"
     android:showAsAction="always"
     android:title="@string/open_gallery" />
 
