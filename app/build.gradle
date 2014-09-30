@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-  compile 'com.android.support:appcompat-v7:20.+'
-  compile group:'com.squareup.picasso', name:'picasso', version:'2.3.4'
+  compile 'com.squareup.picasso:picasso:2.3.4'
+  compile 'com.android.support:support-v4:20.0.0'
 }
 
