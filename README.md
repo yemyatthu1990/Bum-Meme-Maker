@@ -5,6 +5,11 @@ BUM Meme Maker - A Simple Meme Creator written exclusively for [Burmese Uncensor
 You can follow the project status on on our [Trello board](https://trello.com/b/K2coCCak/bumc).
 
 
+Code Status
+-----------
+[![Build Status](https://travis-ci.org/mmublackpirate/Bum-Meme-Maker.svg?branch=master)](https://travis-ci.org/mmublackpirate/Bum-Meme-Maker)
+
+
 Contributing
 ------------
 
