@@ -21,6 +21,7 @@ public class MemeListPagerActivity extends FragmentActivity {
 
     PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     setContentView(R.layout.acitivty_memelist);
+    getActionBar().setIcon(android.R.drawable.screen_background_light_transparent);
 
     ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
     SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
