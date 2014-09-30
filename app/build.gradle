@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 android {
   compileSdkVersion 20
@@ -9,10 +9,10 @@ android {
 
   defaultConfig {
     applicationId "com.yemyatthu.bumc"
-    minSdkVersion 16
+    minSdkVersion 14
     targetSdkVersion 20
-    versionCode 6
-    versionName "1.2"
+    versionCode 1
+    versionName "1.0"
   }
   buildTypes {
     release {
