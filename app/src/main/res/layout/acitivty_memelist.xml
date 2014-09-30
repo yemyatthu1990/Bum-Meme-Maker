@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -7,14 +6,14 @@
 
   <com.yemyatthu.bumc.widget.SlidingTabLayout
       android:id="@+id/sliding_tabs"
-      android:background="@color/main_color"
+      android:background="@drawable/tab_background"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"/>
 
   <android.support.v4.view.ViewPager
       android:id="@+id/pager"
       android:layout_width="match_parent"
-      android:layout_height="0px"
+      android:layout_height="0dp"
       android:layout_weight="1"/>
-
 </LinearLayout>
+

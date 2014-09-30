@@ -1,6 +1,5 @@
 package com.yemyatthu.bumc.activity;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,13 +24,9 @@ public class MemeListPagerActivity extends FragmentActivity {
 
     ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
     SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
-
     slidingTabLayout.setSelectedIndicatorColors(Color.WHITE);
-
-    final ActionBar actionBar = getActionBar();
-    if (actionBar == null) {
-      throw new AssertionError();
-    }
+    // FIXME it's causing some problem :S
+    slidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
 
     mViewPager.setAdapter(
         new SlidingTabAdapter(getSupportFragmentManager(), MemeListPagerActivity.this));
