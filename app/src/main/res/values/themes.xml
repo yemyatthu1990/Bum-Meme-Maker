@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+  <style name="FrameworkRoot.Widget.ActionButton.Overflow"
+      parent="android:Widget.Holo.ActionButton.Overflow"/>
+
   <!-- the theme applied to the application or activity -->
   <style name="BUMTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
     <item name="android:actionBarStyle">@style/ActionBar.Solid.BUM</item>
     <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Solid.BUM</item>
+
+    <item name="android:actionOverflowButtonStyle">@style/ActionButton.Overflow</item>
+  </style>
+
+  <style name="ActionButton.Overflow" parent="FrameworkRoot.Widget.ActionButton.Overflow">
+    <item name="android:src">@drawable/ic_menu_moreoverflow_mtrl_alpha</item>
   </style>
 </resources>
