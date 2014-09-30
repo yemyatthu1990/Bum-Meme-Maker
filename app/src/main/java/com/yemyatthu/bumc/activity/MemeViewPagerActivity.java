@@ -33,6 +33,7 @@ public class MemeViewPagerActivity extends FragmentActivity {
     mViewPager = new ViewPager(this);
     mViewPager.setId(R.id.viewPager);
     setContentView(mViewPager);
+    getActionBar().setIcon(android.R.drawable.screen_background_light_transparent);
     tabPos = getIntent().getIntExtra(TAB_TAG, 10);
 
     mMemes = MemeLab.get(this).getMemes();
