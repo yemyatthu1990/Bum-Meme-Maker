@@ -1,6 +1,4 @@
 <resources>
-
-
   <style name="customButton" parent="android:Widget.Button">
     <item name="android:gravity">center_vertical|center_horizontal</item>
     <item name="android:layout_margin">4dp</item>
