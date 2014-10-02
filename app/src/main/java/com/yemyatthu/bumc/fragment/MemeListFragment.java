@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.ListFragment;
 import android.text.Editable;
@@ -139,6 +141,7 @@ public class MemeListFragment extends ListFragment {
     }
 
     if (mCustomMemes.contains(MemeLab.get(getActivity()).getMeme(path))) {
+
       File file = null;
       try {
         file = new File(Environment.getExternalStorageDirectory().toString() + MemeViewFragment.
@@ -248,8 +251,38 @@ public class MemeListFragment extends ListFragment {
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (resultCode != Activity.RESULT_OK) return;
     if (requestCode == SELECT_PICTURE) {
+
       Uri selectedImageUri = data.getData();
-      selectedImagePath = getPath(selectedImageUri);
+      if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (selectedImageUri != null) {
+          try {
+            // get the id of the image selected by the user
+            String wholeID = DocumentsContract.getDocumentId(data.getData());
+            String id = wholeID.split(":")[1];
+
+            String[] projection = { MediaStore.Images.Media.DATA };
+            String whereClause = MediaStore.Images.Media._ID + "=?";
+            Cursor cursor = getActivity().getContentResolver()
+                .query(getUri(), projection, whereClause, new String[] { id }, null);
+            if (cursor != null) {
+              int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+              if (cursor.moveToFirst()) {
+                selectedImagePath = cursor.getString(column_index);
+              }
+
+              cursor.close();
+            } else {
+              selectedImagePath = selectedImageUri.getPath();
+            }
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+      } else {
+        selectedImageUri = data.getData();
+        selectedImagePath = getPath(selectedImageUri);
+      }
+
       Intent i = new Intent(getActivity(), MemeViewPagerActivity.class);
       i.putExtra(MemeViewFragment.NAME_TAG, selectedImagePath);
       startActivityForResult(i, CUSTOM_ID);
@@ -319,6 +352,15 @@ public class MemeListFragment extends ListFragment {
     public void notifyDataSetChanged() {
       super.notifyDataSetChanged();
     }
+  }
+
+  private Uri getUri() {
+    String state = Environment.getExternalStorageState();
+    if (!state.equalsIgnoreCase(Environment.MEDIA_MOUNTED)) {
+      return MediaStore.Images.Media.INTERNAL_CONTENT_URI;
+    }
+
+    return MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
   }
 }
 
