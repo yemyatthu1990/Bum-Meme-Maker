@@ -104,7 +104,7 @@ public class MemeViewFragment extends Fragment {
   public void onResume() {
     super.onResume();
     type = Typeface.createFromAsset(getActivity().getAssets(), "fonts/"
-        + prefs.getString("font", "Impact")
+        + prefs.getString("font", "SmartZawgyiPro")
         + ".ttf"); // This takes the font name from SharedPreference
 
     switch (Integer.parseInt(prefs.getString("fontColor", "1"))) {

@@ -3,8 +3,9 @@
   <string-array name="FontList">
     <item>Impact</item>
     <item>ComicSansMS</item>
-    <item>Zawgyi</item>
+    <item>SmartZawgyiPro</item>
   </string-array>
+
   <string-array name="colorListArray">
     <item>White</item>
     <item>Black</item>
