@@ -1,16 +1,12 @@
 package com.yemyatthu.bumc.activity;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import com.yemyatthu.bumc.R;
 import com.yemyatthu.bumc.fragment.MemeViewFragment;
 import com.yemyatthu.bumc.model.Meme;
@@ -82,7 +78,6 @@ public class MemeViewPagerActivity extends FragmentActivity {
     });
 
     memeName = getIntent().getStringExtra(MemeViewFragment.NAME_TAG);
-    Log.i("memeName", "memeNam is " + memeName);
     for (int i = 0; i < mPagerMemes.size(); i++) {
       if (mPagerMemes.get(i).getName().equals(memeName)) {
         mViewPager.setCurrentItem(i);
@@ -131,15 +126,5 @@ public class MemeViewPagerActivity extends FragmentActivity {
     }
 
     return memeName;
-  }
-
-  // By using this method get the Uri of Internal/External Storage for Media
-  private Uri getUri() {
-    String state = Environment.getExternalStorageState();
-    if (!state.equalsIgnoreCase(Environment.MEDIA_MOUNTED)) {
-      return MediaStore.Images.Media.INTERNAL_CONTENT_URI;
-    }
-
-    return MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
   }
 }
