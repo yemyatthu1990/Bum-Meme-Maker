@@ -140,7 +140,7 @@
         android:textStyle="bold"
         android:typeface="serif" />
 
-      <TextView
+      <com.yemyatthu.bumc.widget.OutLineTextView
         android:id="@+id/top_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
         android:textStyle="bold" />
 
 
-      <TextView
+      <com.yemyatthu.bumc.widget.OutLineTextView
         android:id="@+id/bottom_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

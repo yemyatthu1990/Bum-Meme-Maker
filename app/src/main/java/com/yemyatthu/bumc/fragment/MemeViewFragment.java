@@ -42,6 +42,8 @@ import com.yemyatthu.bumc.activity.AboutViewActivity;
 import com.yemyatthu.bumc.activity.MemeViewPagerActivity;
 import com.yemyatthu.bumc.activity.SettingsActivity;
 import com.yemyatthu.bumc.utils.MemeLab;
+import com.yemyatthu.bumc.widget.OutLineTextView;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -82,8 +84,8 @@ public class MemeViewFragment extends Fragment {
   private int bottomViewSize;
   private EditText bottomEdit;
   private TextView waterMark;
-  private TextView topView;
-  private TextView bottomView;
+  private OutLineTextView topView;
+  private OutLineTextView bottomView;
   private ImageView memeView;
   private Bitmap bitmap;
   private ArrayList<Integer> restoredSize = new ArrayList<Integer>();
@@ -189,14 +191,18 @@ public class MemeViewFragment extends Fragment {
       default:
         shadowColor = Color.BLACK;
     }
-    topView.setShadowLayer((float) 10, 0, 0, shadowColor);
-    bottomView.setShadowLayer((float) 10, 0, 0, shadowColor);
+    topView.setShadowLayer((float)6,(float)0,(float)0,shadowColor);
+    bottomView.setShadowLayer((float)6,(float)0,(float)0,shadowColor);
 
     if (prefs.getBoolean("capCheckBox", true)) {
       topView.setAllCaps(true);
+      bottomView.setAllCaps(true);
     }
     if (!(prefs.getBoolean("capCheckBox", true))) {
       topView.setAllCaps(false);
+
+      bottomView.setAllCaps(false);
+
     }
 
     if (prefs.getBoolean("borderBarCheckBox", false)) {
@@ -307,12 +313,12 @@ public class MemeViewFragment extends Fragment {
     waterMark = (TextView) v.findViewById(R.id.waterMarkTextView);
 
     waterMark.setVisibility(View.INVISIBLE);
-    topView = (TextView) v.findViewById(R.id.top_text);
+    topView = (OutLineTextView) v.findViewById(R.id.top_text);
 
     topView.setText(topViewText);
     topView.setTextSize(TypedValue.COMPLEX_UNIT_SP, topViewSize);
 
-    bottomView = (TextView) v.findViewById(R.id.bottom_text);
+    bottomView = (OutLineTextView) v.findViewById(R.id.bottom_text);
 
     bottomView.setTypeface(type);
     bottomView.setText(bottomViewText);
