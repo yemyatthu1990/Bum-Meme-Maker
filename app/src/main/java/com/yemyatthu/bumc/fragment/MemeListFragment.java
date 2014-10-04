@@ -1,5 +1,6 @@
 package com.yemyatthu.bumc.fragment;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -93,7 +94,7 @@ public class MemeListFragment extends ListFragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.list_view, null);
+    return inflater.inflate(R.layout.list_view, container, false);
   }
 
   @Override
@@ -215,6 +216,8 @@ public class MemeListFragment extends ListFragment {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
 
+      case android.R.id.home:
+        getActivity().finish();
       case R.id.settings_menu:
         Intent i = new Intent(getActivity(), SettingsActivity.class);
         startActivity(i);
@@ -247,7 +250,7 @@ public class MemeListFragment extends ListFragment {
     return res;
   }
 
-  @Override
+  @Override @TargetApi(19)
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (resultCode != Activity.RESULT_OK) return;
     if (requestCode == SELECT_PICTURE) {
@@ -318,6 +321,15 @@ public class MemeListFragment extends ListFragment {
     }
   }
 
+  private Uri getUri() {
+    String state = Environment.getExternalStorageState();
+    if (!state.equalsIgnoreCase(Environment.MEDIA_MOUNTED)) {
+      return MediaStore.Images.Media.INTERNAL_CONTENT_URI;
+    }
+
+    return MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+  }
+
   public class MemeAdapter extends ArrayAdapter<Meme> {
     public MemeAdapter(ArrayList<Meme> memes) {
       super(getActivity(), 0, memes);
@@ -332,7 +344,8 @@ public class MemeListFragment extends ListFragment {
 
       if (convertView == null) {
 
-        convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_meme_list, null);
+        convertView = getActivity().getLayoutInflater()
+            .inflate(R.layout.fragment_meme_list, container, false);
       }
       mainMeme = getItem(position);
       ViewHolder holder = new ViewHolder();
@@ -352,15 +365,6 @@ public class MemeListFragment extends ListFragment {
     public void notifyDataSetChanged() {
       super.notifyDataSetChanged();
     }
-  }
-
-  private Uri getUri() {
-    String state = Environment.getExternalStorageState();
-    if (!state.equalsIgnoreCase(Environment.MEDIA_MOUNTED)) {
-      return MediaStore.Images.Media.INTERNAL_CONTENT_URI;
-    }
-
-    return MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
   }
 }
 

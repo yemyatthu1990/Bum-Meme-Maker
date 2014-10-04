@@ -28,22 +28,12 @@
     <activity
       android:name="com.yemyatthu.bumc.activity.SettingsActivity"
       android:label="@string/settings_menu"
-      android:parentActivityName="com.yemyatthu.bumc.activity.MemeListPagerActivity"
       android:screenOrientation="sensorPortrait">
-      <!-- Parent activity meta-data to support 4.0 and lower -->
-      <meta-data
-        android:name="android.support.PARENT_ACTIVITY"
-        android:value="com.yemyatthu.bummememaker.MemeListPagerActivity" />
     </activity>
     <activity
       android:name="com.yemyatthu.bumc.activity.MemeViewPagerActivity"
       android:label="@string/app_name"
-      android:parentActivityName="com.yemyatthu.bumc.activity.MemeListPagerActivity"
       android:screenOrientation="sensorPortrait">
-      <!-- Parent activity meta-data to support 4.0 and lower -->
-      <meta-data
-        android:name="android.support.PARENT_ACTIVITY"
-        android:value="com.yemyatthu.bummememaker.MemeListPagerActivity" />
     </activity>
     <activity
       android:name="com.yemyatthu.bumc.activity.AboutViewActivity"

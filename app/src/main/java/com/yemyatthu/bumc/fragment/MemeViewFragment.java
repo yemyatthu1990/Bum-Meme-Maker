@@ -16,7 +16,6 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -43,7 +42,6 @@ import com.yemyatthu.bumc.activity.MemeViewPagerActivity;
 import com.yemyatthu.bumc.activity.SettingsActivity;
 import com.yemyatthu.bumc.utils.MemeLab;
 import com.yemyatthu.bumc.widget.OutLineTextView;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -191,8 +189,8 @@ public class MemeViewFragment extends Fragment {
       default:
         shadowColor = Color.BLACK;
     }
-    topView.setShadowLayer((float)6,(float)0,(float)0,shadowColor);
-    bottomView.setShadowLayer((float)6,(float)0,(float)0,shadowColor);
+    topView.setShadowLayer((float) 6, (float) 0, (float) 0, shadowColor);
+    bottomView.setShadowLayer((float) 6, (float) 0, (float) 0, shadowColor);
 
     if (prefs.getBoolean("capCheckBox", true)) {
       topView.setAllCaps(true);
@@ -202,7 +200,6 @@ public class MemeViewFragment extends Fragment {
       topView.setAllCaps(false);
 
       bottomView.setAllCaps(false);
-
     }
 
     if (prefs.getBoolean("borderBarCheckBox", false)) {
@@ -677,7 +674,7 @@ public class MemeViewFragment extends Fragment {
     switch (item.getItemId()) {
       // Respond to the action bar's Up/Home button
       case android.R.id.home:
-        NavUtils.navigateUpFromSameTask(getActivity());
+        getActivity().finish();
         return true;
       case R.id.settings_menu:
         Intent i = new Intent(getActivity(), SettingsActivity.class);
