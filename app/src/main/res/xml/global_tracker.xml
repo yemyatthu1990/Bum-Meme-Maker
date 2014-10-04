@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <integer name="ga_sessionTimeout">300</integer>
+
+  <!-- Enable automatic Activity measurement -->
+  <bool name="ga_autoActivityTracking">true</bool>
+
+  <!-- The screen names that will appear in reports -->
+  <screenName name="com.yemyatthu.bumc.fragment.MemeViewFragment">
+    BUMC Create Meme Activity
+  </screenName>
+  <screenName name="com.yemyatthu.bumc.fragment.MemeListFragment">
+    BUMC Meme List Activity
+  </screenName>
+  <screenName name="com.yemyatthu.bumc.fragment.AboutViewFragment">
+    BUMC Meme About
+  </screenName>
+  <screenName name="com.yemyatthu.bumc.fragment.SettingsFragment">
+    BUMC Meme Setting Activity
+  </screenName>
+
+  <!--  The following value should be replaced with correct property id. -->
+  <string name="ga_trackingId">UA-55408682-1</string>
+</resources>

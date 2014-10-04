@@ -7,6 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.yemyatthu.bumc.BUMC;
+import com.yemyatthu.bumc.BUMC.TrackerName;
 import com.yemyatthu.bumc.R;
 
 public class ConfirmDialogFragment extends DialogFragment {
@@ -31,7 +35,12 @@ public class ConfirmDialogFragment extends DialogFragment {
 
           @Override
           public void onClick(DialogInterface dialog, int which) {
-            // TODO Auto-generated method stub
+            Tracker t =
+                ((BUMC) getActivity().getApplication()).getTracker(TrackerName.GLOBAL_TRACKER);
+            // Build and send an Event.
+            t.send(new HitBuilders.EventBuilder().setCategory("New Meme")
+                .setAction("Change Name and Save Meme")
+                .build());
             sendResult(Activity.RESULT_OK);
           }
         })
@@ -39,7 +48,6 @@ public class ConfirmDialogFragment extends DialogFragment {
 
           @Override
           public void onClick(DialogInterface dialog, int which) {
-            // TODO Auto-generated method stub
             sendResult(Activity.RESULT_CANCELED);
           }
         })
