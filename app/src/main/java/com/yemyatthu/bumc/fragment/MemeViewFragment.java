@@ -3,7 +3,6 @@ package com.yemyatthu.bumc.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,7 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
@@ -35,13 +33,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
 import com.yemyatthu.bumc.R;
 import com.yemyatthu.bumc.activity.AboutViewActivity;
-import com.yemyatthu.bumc.activity.MemeViewPagerActivity;
 import com.yemyatthu.bumc.activity.SettingsActivity;
 import com.yemyatthu.bumc.utils.MemeLab;
 import com.yemyatthu.bumc.widget.OutLineTextView;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -623,7 +622,7 @@ public class MemeViewFragment extends Fragment {
     }
   }
 
-  @Override
+    @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (resultCode != Activity.RESULT_OK) return;
     if (requestCode == REQUEST_CODE1) {
@@ -646,14 +645,6 @@ public class MemeViewFragment extends Fragment {
       addFile(file);
       sendResult(MEME_RESULT, true);
     }
-    if (requestCode == SELECT_PICTURE) {
-
-      Uri selectedImageUri = data.getData();
-      path = getPath(selectedImageUri);
-      Intent i = new Intent(getActivity(), MemeViewPagerActivity.class);
-      i.putExtra(NAME_TAG, path);
-      startActivityForResult(i, CUSTOM_ID);
-    }
 
     if (requestCode == CUSTOM_ID) {
       sendResult(MEME_RESULT, true);
@@ -667,6 +658,8 @@ public class MemeViewFragment extends Fragment {
     inflater.inflate(R.menu.meme_view, menu);
     MenuItem search = menu.findItem(R.id.search_menu);
     search.setVisible(false);
+    MenuItem addMeme = menu.findItem(R.id.open_image);
+    addMeme.setVisible(false);
   }
 
   @Override
@@ -684,29 +677,12 @@ public class MemeViewFragment extends Fragment {
         Intent d = new Intent(getActivity(), AboutViewActivity.class);
         startActivity(d);
         return true;
-      case R.id.open_image:
-        Intent e = new Intent();
-        e.setType("image/*");
-        e.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(e,
-            getActivity().getResources().getString(R.string.image_picker_title)), SELECT_PICTURE);
-        return true;
+
       default:
         return super.onOptionsItemSelected(item);
     }
   }
 
-  public String getPath(Uri uri) {
-    String res = null;
-    String[] projection = { MediaStore.Images.Media.DATA };
-    Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
-    if (cursor.moveToFirst()) {
-      int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-      res = cursor.getString(column_index);
-    }
-    cursor.close();
-    return res;
-  }
 
   public void sendResult(String tag, boolean result) {
     Intent i = new Intent();
