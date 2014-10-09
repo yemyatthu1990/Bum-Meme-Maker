@@ -38,6 +38,7 @@ import com.squareup.picasso.Picasso;
 import com.yemyatthu.bumc.R;
 import com.yemyatthu.bumc.activity.AboutViewActivity;
 import com.yemyatthu.bumc.activity.SettingsActivity;
+import com.yemyatthu.bumc.utils.DragNDrop;
 import com.yemyatthu.bumc.utils.MemeLab;
 import com.yemyatthu.bumc.widget.OutLineTextView;
 
@@ -68,7 +69,7 @@ public class MemeViewFragment extends Fragment {
   private int fontColor;
   private int borderColor;
   private int shadowColor;
-  private View memeContainer;
+  private ViewGroup memeContainer;
   private CheckBox favoriteCheckBox;
   private Button addTemplate;
   private Button makeMeme;
@@ -309,12 +310,15 @@ public class MemeViewFragment extends Fragment {
     waterMark = (TextView) v.findViewById(R.id.waterMarkTextView);
 
     waterMark.setVisibility(View.INVISIBLE);
+    memeContainer =(ViewGroup) v.findViewById(R.id.memeView_container);
     topView = (OutLineTextView) v.findViewById(R.id.top_text);
+    DragNDrop.startDragNDrop(topView,memeContainer);
 
     topView.setText(topViewText);
     topView.setTextSize(TypedValue.COMPLEX_UNIT_SP, topViewSize);
 
     bottomView = (OutLineTextView) v.findViewById(R.id.bottom_text);
+    DragNDrop.startDragNDrop(bottomView,memeContainer);
 
     bottomView.setTypeface(type);
     bottomView.setText(bottomViewText);
@@ -422,7 +426,7 @@ public class MemeViewFragment extends Fragment {
         cfDialog.show(fm, CONFIRM);
       }
     });
-    memeContainer = v.findViewById(R.id.memeView_container);
+
     makeMeme = (Button) v.findViewById(R.id.make_meme);
     makeMeme.setOnClickListener(new OnClickListener() {
 

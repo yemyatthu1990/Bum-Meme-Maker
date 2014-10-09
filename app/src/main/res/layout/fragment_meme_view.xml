@@ -138,7 +138,7 @@
         android:shadowRadius="5"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:typeface="serif" />
+        android:typeface="serif"/>
 
       <com.yemyatthu.bumc.widget.OutLineTextView
         android:id="@+id/top_text"
@@ -149,7 +149,6 @@
         android:layout_alignRight="@id/meme_view"
         android:layout_alignStart="@id/meme_view"
         android:layout_alignTop="@id/meme_view"
-
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:maxLines="3"
@@ -168,7 +167,6 @@
         android:layout_alignLeft="@id/meme_view"
         android:layout_alignRight="@id/meme_view"
         android:layout_alignStart="@id/meme_view"
-
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:maxLines="3"
