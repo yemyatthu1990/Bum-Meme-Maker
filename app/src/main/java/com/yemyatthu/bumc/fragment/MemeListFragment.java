@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -197,10 +198,12 @@ public class MemeListFragment extends ListFragment {
       }
     });
     txtSearch.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
-
+      InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
       @Override
       public void onViewAttachedToWindow(View v) {
         // TODO Auto-generated method stub
+        txtSearch.requestFocus();
+        imm.showSoftInput(txtSearch, InputMethodManager.SHOW_IMPLICIT);
 
       }
 
@@ -208,6 +211,7 @@ public class MemeListFragment extends ListFragment {
       public void onViewDetachedFromWindow(View v) {
         // TODO Auto-generated method stub
         txtSearch.setText("");
+        imm.hideSoftInputFromWindow(txtSearch.getWindowToken(), 0);
       }
     });
   }
