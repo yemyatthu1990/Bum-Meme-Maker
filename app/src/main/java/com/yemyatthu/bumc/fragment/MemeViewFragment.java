@@ -303,6 +303,7 @@ public class MemeViewFragment extends Fragment {
             .load(file)
             .placeholder(R.drawable.placeholder)
             .skipMemoryCache()
+            .fit()
             .into(memeView);
       }
     }
